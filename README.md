@@ -689,3 +689,31 @@ output "kms_key_alias" {
   value = aws_kms_alias.this.arn
 }
 ```
+
+<br>
+
+## Dependencies
+
+### Required
+
+* [Terraform](https://www.terraform.io/)
+* [GIT](https://git-scm.com/download/win)
+* [AWS-Account](https://https://aws.amazon.com/)
+
+### Recommended
+
+* [terraform for vsc](https://github.com/mauve/vscode-terraform)
+* [terraform-config-inspect](https://github.com/hashicorp/terraform-config-inspect)
+
+<br>
+
+## Contributions and Contacts
+
+This project is owned by [CloudMage](rnason@cloudmage.com).
+
+To contribute, please:
+
+* Fork the project
+* Create a local branch
+* Submit Changes
+* Create A Pull Request

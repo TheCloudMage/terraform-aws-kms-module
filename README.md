@@ -702,8 +702,8 @@ output "kms_key_alias" {
 
 ### Recommended
 
-* [terraform for vsc](https://github.com/mauve/vscode-terraform)
-* [terraform-config-inspect](https://github.com/hashicorp/terraform-config-inspect)
+* [Terraform for VSCode](https://github.com/mauve/vscode-terraform)
+* [Terraform Config Inspect](https://github.com/hashicorp/terraform-config-inspect)
 
 <br>
 

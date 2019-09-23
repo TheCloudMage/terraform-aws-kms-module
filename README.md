@@ -22,7 +22,7 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
-### <mark>`REQUIRED`</mark> kms_key_description
+### <mark>REQUIRED</mark> kms_key_description
 
 This variable should be passed containing the description of the KMS key being provisioned.
 

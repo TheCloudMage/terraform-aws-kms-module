@@ -701,7 +701,6 @@ The template will finally create the following outputs that can be pulled and us
 # KMS Key:           #
 ######################
 output "kms_key_arn" {}
-
 output "kms_key_id" {}
 
 ######################

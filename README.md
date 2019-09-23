@@ -16,6 +16,25 @@ None Defined
 
 <br>
 
+## Module Usage
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.0"
+
+  // Required
+  kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"
+  kms_key_alias_name        = "prod/s3"
+  
+  // Optional
+  kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+  kms_user_principal_list     = ["arn:aws:iam::123456789101:user/daboss"]
+  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/authapp1"]
+}
+```
+
+<br>
+
 ## Variables
 
 The following variables are utilized by this module and cause the module to behave dynamically based upon the variables that are populated and passed into the module.
@@ -48,6 +67,8 @@ kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup
 <br><br>
 
 ### ![Required](images/required.png) kms_key_alias_name
+
+-----
 
  This variable should be passed containing desired alias of the requested KMS Key.
 
@@ -86,7 +107,7 @@ Statement:
       Resources: "*"
 ```
 
-<br>
+<br><br>
 
 `terraform plan`
 
@@ -162,6 +183,8 @@ can't guarantee that exactly these actions will be performed if
 
 ### ![Optional](images/optional.png) kms_admin_principal_list
 
+-----
+
 This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
@@ -218,7 +241,7 @@ Statement:
       Resources: "*"
 ```
 
-<br>
+<br><br>
 
 `terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]`
 
@@ -318,6 +341,8 @@ can't guarantee that exactly these actions will be performed if
 
 ### ![Optional](images/optional.png) kms_user_principal_list
 
+-----
+
 This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including users permissions to users/roles later by the key owner.
@@ -365,7 +390,7 @@ Statement:
       Resources: "*"
 ```
 
-<br>
+<br><br>
 
 `terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_user_principal_list=["arn:aws:iam::123456789101:root"]'`
 
@@ -480,6 +505,8 @@ can't guarantee that exactly these actions will be performed if
 
 ### ![Optional](images/optional.png) kms_resource_principal_list
 
+-----
+
 This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key resource policy **will not be included** into the KMS key policy. The account root owner, any defined key administrators, and any defined key users will still have their defined permissions, but no additional resources with grant permissions will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including resource permissions to users/roles later by the key owner.
@@ -530,7 +557,7 @@ Statement:
       }
 ```
 
-<br>
+<br><br>
 
 `terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_user_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_resource_principal_list=["arn:aws:iam::123456789101:root"]'`
 
@@ -673,20 +700,14 @@ The template will finally create the following outputs that can be pulled and us
 ######################
 # KMS Key:           #
 ######################
-output "kms_key_arn" {
-  value = aws_kms_key.this.arn
-}
+output "kms_key_arn" {}
 
-output "kms_key_id" {
-  value = aws_kms_key.this.id
-}
+output "kms_key_id" {}
 
 ######################
 # KMS Key Alias:     #
 ######################
-output "kms_key_alias" {
-  value = aws_kms_alias.this.arn
-}
+output "kms_key_alias" {}
 ```
 
 <br>
@@ -708,7 +729,7 @@ output "kms_key_alias" {
 
 ## Contributions and Contacts
 
-This project is owned by [CloudMage](rnason@cloudmage.com).
+This project is owned by [CloudMage](rnason@cloudmage.io).
 
 To contribute, please:
 

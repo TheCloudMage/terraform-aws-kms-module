@@ -2,8 +2,6 @@
 
 ## Description
 
------
-
 This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project what KMS Key polices should be placed on teh KMS key at the time of provisioning.
 
 <br>

@@ -22,7 +22,9 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
-### <span style="color: yellow;">REQUIRED</span> kms_key_description
+### ![Required](images/required.png) kms_key_description
+
+-----
 
 This variable should be passed containing the description of the KMS key being provisioned.
 
@@ -37,7 +39,7 @@ variable "kms_key_description" {
 
 <br>
 
-`EXAMPLE`: Include the following in your tfvars file
+__EXAMPLE__: Include the following in your environments tfvars file
 
 ```terraform
 kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup bucket."
@@ -45,9 +47,9 @@ kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup
 
 <br><br>
 
-### kms_key_alias_name
+### ![Required](images/required.png) kms_key_alias_name
 
-`REQUIRED`: This variable should be passed containing desired alias of the requested KMS Key.
+ This variable should be passed containing desired alias of the requested KMS Key.
 
 <br>
 
@@ -62,7 +64,7 @@ variable "kms_key_alias_name" {
 
 <br>
 
-`EXAMPLE`: Include the following in your tfvars file
+__EXAMPLE__: Include the following in your environments tfvars file
 
 ```terraform
 kms_key_alias_name = "rds/backup_bucket"
@@ -158,9 +160,9 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-### kms_admin_principal_list
+### ![Optional](images/optional.png) kms_admin_principal_list
 
-`OPTIONAL`: This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
 
@@ -176,7 +178,7 @@ variable "kms_admin_principal_list" {
 
 <br>
 
-`EXAMPLE`: Include the following in your tfvars file
+__EXAMPLE__: Include the following in your environments tfvars file
 
 ```terraform
 kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role", "arn:aws:iam::123456789101:user/kms_admin"]
@@ -314,9 +316,9 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-### kms_user_principal_list
+### ![Optional](images/optional.png) kms_user_principal_list
 
-`OPTIONAL`: This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including users permissions to users/roles later by the key owner.
 
@@ -332,7 +334,7 @@ variable "kms_user_principal_list" {
 
 <br>
 
-`EXAMPLE`: Include the following in your tfvars file
+__EXAMPLE__: Include the following in your environments tfvars file
 
 ```terraform
 kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
@@ -476,9 +478,9 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-### kms_resource_principal_list
+### ![Optional](images/optional.png) kms_resource_principal_list
 
-`OPTIONAL`: This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key resource policy **will not be included** into the KMS key policy. The account root owner, any defined key administrators, and any defined key users will still have their defined permissions, but no additional resources with grant permissions will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including resource permissions to users/roles later by the key owner.
 
@@ -490,12 +492,11 @@ variable "kms_resource_principal_list" {
   description = "A list of users/roles that will be granted permissions to create/list/delete temporary grants to the provisioned KMS Key."
   default     = []
 }
-}
 ```
 
 <br>
 
-`EXAMPLE`: Include the following in your tfvars file
+__EXAMPLE__: Include the following in your environments tfvars file
 
 ```terraform
 kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-Role"]

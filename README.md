@@ -209,7 +209,7 @@ kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role",
 
 <br>
 
-> Note: You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
 
 <br>
 
@@ -367,7 +367,7 @@ kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role"
 
 <br>
 
-> Note: You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
 
 <br>
 
@@ -531,7 +531,7 @@ kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-R
 
 <br>
 
-> Note: You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
 
 <br>
 

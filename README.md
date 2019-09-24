@@ -1,4 +1,4 @@
-# Terrafrom KMS Key Module
+# Terraform KMS Key Module
 
 ![Hero](images/tf_kms.png)  
 

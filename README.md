@@ -20,7 +20,7 @@ None Defined
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.0"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.1"
 
   // Required
   kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"

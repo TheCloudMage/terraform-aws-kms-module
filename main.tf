@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "kms_admin_policy" {
     
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_admin_principal_list) > 0 ? var.kms_admin_principal_list : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+      identifiers = length(var.kms_admin_principal_list) > 0 ? var.kms_admin_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
     
     actions      = [
@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "kms_user_policy" {
     
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_user_principal_list) > 0 ? var.kms_user_principal_list : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+      identifiers = length(var.kms_user_principal_list) > 0 ? var.kms_user_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
 
     actions   = [
@@ -115,7 +115,7 @@ data "aws_iam_policy_document" "kms_resource_policy" {
     
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_resource_principal_list) > 0 ? var.kms_resource_principal_list : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+      identifiers = length(var.kms_resource_principal_list) > 0 ? var.kms_resource_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
 
     actions      = [

@@ -27,9 +27,10 @@ module "kms" {
   kms_key_alias_name        = "prod/s3"
   
   // Optional
+  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root"]
   kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
-  kms_user_principal_list     = ["arn:aws:iam::123456789101:user/daboss"]
-  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/authapp1"]
+  kms_user_principal_list     = ["arn:aws:iam::123456789101:user/cloudmage"]
+  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/cloudmage"]
 }
 ```
 
@@ -41,11 +42,9 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
-### ![Required](images/required.png) kms_key_description
-
------
-
-This variable should be passed containing the description of the KMS key being provisioned.
+| <h2><b>kms_key_description</b></h2>    |                      |
+|------                           |------                |
+|![Required](images/required.png) | This variable should be passed containing a short description of what the provisioned KMS key will be used for.
 
 <br>
 

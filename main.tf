@@ -26,9 +26,7 @@ data "aws_iam_policy_document" "kms_owner_policy" {
     
     principals {
       type        = "AWS"
-      identifiers = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-      ]
+      identifiers = length(var.kms_owner_principal_list) > 0 ? var.kms_owner_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
     
     actions       = ["kms:*"]

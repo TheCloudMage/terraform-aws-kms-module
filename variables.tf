@@ -6,6 +6,12 @@ variable "kms_key_description" {
   description = "The description that will be applied to the provisioned KMS Key."
 }
 
+variable "kms_owner_principal_list" {
+  type        = list
+  description = "A list of users/roles/accounts that will own the provisioned KMS Key."
+  default     = []
+}
+
 variable "kms_admin_principal_list" {
   type        = list
   description = "A list of users/roles that will administrator the provisioned KMS Key."

@@ -833,6 +833,8 @@ Statement:
       }
 ```
 
+<br><br>
+
 <!-- markdownlint-disable MD024 -->
 ### Module Testing
 
@@ -1014,24 +1016,30 @@ output "kms_key_id" {}
 output "kms_key_alias" {}
 ```
 
-<br>
+<br><br>
 
-## Dependencies
+<!-- markdownlint-disable MD025 -->
+# Dependencies
 
-### Required
+<br><br>
+
+<!-- markdownlint-disable MD025 -->
+# Requirements
 
 * [Terraform](https://www.terraform.io/)
 * [GIT](https://git-scm.com/download/win)
 * [AWS-Account](https://https://aws.amazon.com/)
 
-### Recommended
+<!-- markdownlint-disable MD025 -->
+# Recommended
 
 * [Terraform for VSCode](https://github.com/mauve/vscode-terraform)
 * [Terraform Config Inspect](https://github.com/hashicorp/terraform-config-inspect)
 
-<br>
+<br><br>
 
-## Contributions and Contacts
+<!-- markdownlint-disable MD025 -->
+# Contributions and Contacts
 
 This project is owned by [CloudMage](rnason@cloudmage.io).
 

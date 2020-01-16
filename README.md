@@ -4,19 +4,22 @@
 
 <br>
 
-## Getting Started
+<!-- markdownlint-disable MD025 -->
+# Getting Started
 
 This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project what KMS Key polices should be placed on the KMS key at the time of provisioning.
 
 <br>
 
-## Module Pre-Requisites
+<!-- markdownlint-disable MD025 -->
+# Module Pre-Requisites
 
 None Defined
 
 <br>
 
-## Module Usage
+<!-- markdownlint-disable MD025 -->
+# Module Usage
 
 ```terraform
 module "kms" {
@@ -36,23 +39,24 @@ module "kms" {
 
 <br>
 
-## Variables
+<!-- markdownlint-disable MD025 -->
+# Variables
 
 The following variables are utilized by this module and cause the module to behave dynamically based upon the variables that are populated and passed into the module.
 
 <br>
 
-### :red_circle: kms_key_description
+## :red_circle: kms_key_description
+
+<br>
+
+![Required](images/neon_required.png)
 
 This variable should be passed containing a short description of what the provisioned KMS key will be used for.
 
 <br>
 
-#### ![Required](images/required.png)
-
-<br>
-
-#### Usage
+### Declaration in variables.tf
 
 ```terraform
 variable "kms_key_description" {
@@ -61,11 +65,10 @@ variable "kms_key_description" {
 }
 ```
 
-<br><br>
+<br>
 
-#### `EXAMPLE`
+### Example .tfvars usage
 
-Include the following in your environments tfvars file
 
 ```terraform
 kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup bucket."
@@ -73,15 +76,23 @@ kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup
 
 <br><br><br>
 
-### ![Required](images/required.png) kms_key_alias_name
+## :red_circle: kms_key_alias_name
 
 -----
 
- This variable should be passed containing desired alias of the requested KMS Key.
-
 <br>
 
-> The required `alias/` prefix is already defined in the module and not required as part of the variable string.
+![Required](images/neon_required.png)
+
+ This variable should be passed containing desired alias of the provisioned KMS Key.
+
+ <br>
+
+ > The required `alias/` prefix is already defined in the module and not required as part of the variable string.
+
+ <br>
+
+### Declaration in variables.tf
 
 ```terraform
 variable "kms_key_alias_name" {
@@ -92,15 +103,17 @@ variable "kms_key_alias_name" {
 
 <br>
 
-__EXAMPLE__: Include the following in your environments tfvars file
+### Example .tfvars usage
 
 ```terraform
 kms_key_alias_name = "rds/backup_bucket"
 ```
 
-<br>
+<br><br>
 
-Without defining any additional variables a key policy with the following permissions will be created and applied to the requested KMS key:
+### Key Policy
+
+Without defining any additional variables, a key policy with the following permissions will be created and applied to the requested KMS key:
 
 ```yaml
 Statement:
@@ -116,7 +129,7 @@ Statement:
 
 <br><br>
 
-`terraform plan`
+### Terraform Plan
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -186,7 +199,7 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
-<br><br>
+<br><br><br>
 
 ### ![Optional](images/optional.png) kms_admin_principal_list
 

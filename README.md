@@ -7,7 +7,7 @@
 <!-- markdownlint-disable MD025 -->
 # Getting Started
 
-This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project what KMS Key polices should be placed on the KMS key at the time of provisioning.
+This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server-side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project, which KMS Key policies should be placed on the KMS CMK at the time of provisioning.
 
 <br>
 
@@ -50,11 +50,11 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
+This variable should be passed containing a short description of what the provisioned KMS CMK will be used for.
+
 ![Required](images/neon_required.png)
 
-This variable should be passed containing a short description of what the provisioned KMS key will be used for.
-
-<br>
+<br><br>
 
 ### Declaration in variables.tf
 
@@ -65,55 +65,55 @@ variable "kms_key_description" {
 }
 ```
 
-<br>
+<br><br>
 
 ### Example .tfvars usage
 
-
 ```terraform
-kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup bucket."
+kms_key_description = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
 ```
 
 <br><br><br>
 
 ## :red_circle: kms_key_alias_name
 
------
-
 <br>
 
-![Required](images/neon_required.png)
+This variable should be passed containing the desired alias assigned to the provisioned KMS CMK.
 
- This variable should be passed containing desired alias of the provisioned KMS Key.
+![Required](images/neon_required.png)
 
  <br>
 
  > The required `alias/` prefix is already defined in the module and not required as part of the variable string.
 
- <br>
+<br><br>
 
+<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
 variable "kms_key_alias_name" {
   type        = string
-  description = "The alias that will be used to reference the provisioned KMS Key. This value will be appended to alias/ in the module."
+  description = "The alias that will be assigned to the provisioned KMS CMK. This value will be appended to alias/ within the module automatically."
 }
-```
-
-<br>
-
-### Example .tfvars usage
-
-```terraform
-kms_key_alias_name = "rds/backup_bucket"
 ```
 
 <br><br>
 
+<!-- markdownlint-disable MD024 -->
+### Example .tfvars usage
+
+```terraform
+kms_key_alias_name = "prod/s3"
+```
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
 ### Key Policy
 
-Without defining any additional variables, a key policy with the following permissions will be created and applied to the requested KMS key:
+Without defining any additional variables, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
 ```yaml
 Statement:
@@ -129,7 +129,26 @@ Statement:
 
 <br><br>
 
-### Terraform Plan
+<!-- markdownlint-disable MD024 -->
+### Module Testing
+
+<!-- markdownlint-disable MD036 -->
+__main.tf__
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+}
+```
+
+<br>
+
+<!-- markdownlint-disable MD036 -->
+__`terraform plan`__
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -157,7 +176,7 @@ Terraform will perform the following actions:
   + resource "aws_kms_alias" "this" {
       + arn            = (known after apply)
       + id             = (known after apply)
-      + name           = "alias/rds/backup_bucket"
+      + name           = "alias/prod/s3"
       + target_key_arn = (known after apply)
       + target_key_id  = (known after apply)
     }
@@ -201,27 +220,195 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br><br>
 
-### ![Optional](images/optional.png) kms_admin_principal_list
+## :large_blue_circle: kms_owner_principal_list
 
------
+This variable is used to define a list of users/roles that will be added to the KMS Key Owner policy statement. If the variable is not defined, then the key owner policy will be included to simply contain the account root user, allowing IAM the ability to assign key permissions using standard IAM policies. If a list of roles/users is defined, then the provided list will instead be used to define  the key owner principals. Typically this variable will only be used if the CMK will be shared and the key provisioner needs to make another AWS account a key owner to allow IAM policies in the other account to define permission for the provisioned shared key.
 
-This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
+![Required](images/neon_optional.png)
 
-If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Declaration in variables.tf
+
+```terraform
+variable "kms_owner_principal_list" {
+  type        = list
+  description = "List of users/roles/accounts that will own and have kms:* on the provisioned CMK."
+  default     = []
+}
+```
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Example .tfvars usage
+
+```terraform
+kms_owner_principal_list = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
+```
 
 <br>
 
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Key Policy
+
+Without defining this variable a key policy with the following permissions will be created and applied to the requested KMS key:
+
+```yaml
+Statement:
+  - Sid: "KMSKeyOwnerPolicy"
+    Effect: Allow
+    Principal:
+      AWS:
+        - "arn:aws:iam::123456789101:root"
+      Action:
+        - "kms:*"
+      Resources: "*"
+```
+
+<br>
+
+If a list defining any IAM users/roles/accounts is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
+
+```yaml
+Statement:
+  - Sid: "KMSKeyOwnerPolicy"
+    Effect: Allow
+    Principal:
+      AWS:
+        - "arn:aws:iam::123456789101:root"
+        - "arn:aws:iam::109876543210:root"
+      Action:
+        - "kms:*"
+      Resources: "*"
+```
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Module Testing
+
+__main.tf__
+
 ```terraform
-variable "kms_admin_principal_list" {
-  type        = list
-  description = "A list of users/roles that will administrator the provisioned KMS Key."
-  default     = []
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
 }
 ```
 
 <br>
 
-__EXAMPLE__: Include the following in your environments tfvars file
+<!-- markdownlint-disable MD036 -->
+__`terraform plan`__
+
+```terraform
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+data.aws_caller_identity.current: Refreshing state...
+data.aws_iam_policy_document.kms_user_policy: Refreshing state...
+data.aws_iam_policy_document.kms_resource_policy: Refreshing state...
+data.aws_iam_policy_document.kms_admin_policy: Refreshing state...
+data.aws_iam_policy_document.kms_owner_policy: Refreshing state...
+data.aws_iam_policy_document.temp_kms_owner_kms_admin_merge_policy: Refreshing state...
+data.aws_iam_policy_document.temp_kms_admin_kms_user_merge_policy: Refreshing state...
+data.aws_iam_policy_document.this: Refreshing state...
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_kms_alias.this will be created
+  + resource "aws_kms_alias" "this" {
+      + arn            = (known after apply)
+      + id             = (known after apply)
+      + name           = "alias/prod/s3"
+      + target_key_arn = (known after apply)
+      + target_key_id  = (known after apply)
+    }
+
+  # aws_kms_key.this will be created
+  + resource "aws_kms_key" "this" {
+      + arn                     = (known after apply)
+      + deletion_window_in_days = 30
+      + description             = "KMS Key"
+      + enable_key_rotation     = true
+      + id                      = (known after apply)
+      + is_enabled              = true
+      + key_id                  = (known after apply)
+      + key_usage               = (known after apply)
+      + policy                  = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "kms:*"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = [
+                            "arn:aws:iam::123456789101:root",
+                            "arn:aws:iam::109876543210:root"
+                          ]
+                      + Resource  = "*"
+                      + Sid       = "KMSKeyOwnerPolicy"
+                    }
+                  }
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+```
+
+<br><br><br>
+
+## :large_blue_circle: kms_admin_principal_list
+
+This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
+
+If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
+
+![Required](images/neon_optional.png)
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Declaration in variables.tf
+
+```terraform
+variable "kms_admin_principal_list" {
+  type        = list
+  description = "List of users/roles that will be key administrators of the provisioned KMS CMK."
+  default     = []
+}
+```
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Example .tfvars usage
 
 ```terraform
 kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role", "arn:aws:iam::123456789101:user/kms_admin"]
@@ -229,15 +416,18 @@ kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role",
 
 <br>
 
-> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
-<br>
+<br><br>
 
-If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS key:
+<!-- markdownlint-disable MD024 -->
+### Key Policy
+
+If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
 ```yaml
 Statement:
-  - Sid: "KMSKeyAdministrationPolicy"
+  - Sid: "KMSKeOwnerPolicy"
     Effect: Allow
     Principal:
       AWS:
@@ -263,7 +453,29 @@ Statement:
 
 <br><br>
 
-`terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]`
+<!-- markdownlint-disable MD024 -->
+### Module Testing
+
+__main.tf__
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+
+  //Optional
+  // kms_owner_principal_list    = []
+}
+```
+
+<br>
+
+<!-- markdownlint-disable MD036 -->
+__`terraform plan`__
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -291,7 +503,7 @@ Terraform will perform the following actions:
   + resource "aws_kms_alias" "this" {
       + arn            = (known after apply)
       + id             = (known after apply)
-      + name           = "alias/rds/backup_bucket"
+      + name           = "alias/prod/s3"
       + target_key_arn = (known after apply)
       + target_key_id  = (known after apply)
     }
@@ -337,7 +549,7 @@ Terraform will perform the following actions:
                         ]
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = "arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyAdministrationPolicy"
@@ -359,27 +571,33 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-### ![Optional](images/optional.png) kms_user_principal_list
+## :large_blue_circle: kms_user_principal_list
 
 -----
 
-This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
 
-If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including users permissions to users/roles later by the key owner.
+If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including usage permissions to users/roles later by the key owner.
 
-<br>
+![Required](images/neon_optional.png)
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Declaration in variables.tf
 
 ```terraform
 variable "kms_user_principal_list" {
   type        = list
-  description = "A list of users/roles that will be granted usage of the provisioned KMS Key."
+  description = "List of users/roles that will be granted usage of the provisioned KMS CMK."
   default     = []
 }
 ```
 
-<br>
+<br><br>
 
-__EXAMPLE__: Include the following in your environments tfvars file
+<!-- markdownlint-disable MD024 -->
+### Example .tfvars usage
 
 ```terraform
 kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
@@ -387,11 +605,14 @@ kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role"
 
 <br>
 
-> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
-<br>
+<br><br>
 
-If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS key:
+<!-- markdownlint-disable MD024 -->
+### Key Policy
+
+If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
 ```yaml
 Statement:
@@ -412,7 +633,30 @@ Statement:
 
 <br><br>
 
-`terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_user_principal_list=["arn:aws:iam::123456789101:root"]'`
+<!-- markdownlint-disable MD024 -->
+### Module Testing
+
+__main.tf__
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+  kms_user_principal_list   = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  
+  // Optional
+  // kms_owner_principal_list  = []
+}
+```
+
+<br><br>
+
+<!-- markdownlint-disable MD036 -->
+__`terraform plan`__
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -440,7 +684,7 @@ Terraform will perform the following actions:
   + resource "aws_kms_alias" "this" {
       + arn            = (known after apply)
       + id             = (known after apply)
-      + name           = "alias/rds/backup_bucket"
+      + name           = "alias/prod/s3"
       + target_key_arn = (known after apply)
       + target_key_id  = (known after apply)
     }
@@ -486,7 +730,7 @@ Terraform will perform the following actions:
                         ]
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = "arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyAdministrationPolicy"
@@ -501,7 +745,10 @@ Terraform will perform the following actions:
                         ]
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = [
+                            "arn:aws:iam::123456789101:role/AWS-RDS-Service-Role",
+                            "arn:aws:iam::123456789101:user/rnason"
+                          ]
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyUserPolicy"
@@ -523,27 +770,33 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-### ![Optional](images/optional.png) kms_resource_principal_list
+## :large_blue_circle: kms_resource_principal_list
 
 -----
 
-This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/user, including a list of a single role/user is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key resource policy **will not be included** into the KMS key policy. The account root owner, any defined key administrators, and any defined key users will still have their defined permissions, but no additional resources with grant permissions will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including resource permissions to users/roles later by the key owner.
 
-<br>
+![Required](images/neon_optional.png)
+
+<br><br>
+
+<!-- markdownlint-disable MD024 -->
+### Declaration in variables.tf
 
 ```terraform
 variable "kms_resource_principal_list" {
   type        = list
-  description = "A list of users/roles that will be granted permissions to create/list/delete temporary grants to the provisioned KMS Key."
+  description = "List of users/roles that will be granted permissions to create/list/delete temporary grants to the provisioned KMS CMK."
   default     = []
 }
 ```
 
-<br>
+<br><br>
 
-__EXAMPLE__: Include the following in your environments tfvars file
+<!-- markdownlint-disable MD024 -->
+### Example .tfvars usage
 
 ```terraform
 kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-Role"]
@@ -551,11 +804,14 @@ kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-R
 
 <br>
 
-> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principles.
+> __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
-<br>
+<br><br>
 
-If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS key:
+<!-- markdownlint-disable MD024 -->
+### Key Policy
+
+If a list defining any IAM users/roles is defined in the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
 ```yaml
 Statement:
@@ -577,9 +833,31 @@ Statement:
       }
 ```
 
+<!-- markdownlint-disable MD024 -->
+### Module Testing
+
+__main.tf__
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name          = "prod/s3"
+  kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+  kms_user_principal_list     = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  
+  // Optional
+  // kms_owner_principal_list  = []
+}
+```
+
 <br><br>
 
-`terraform plan -var='kms_admin_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_user_principal_list=["arn:aws:iam::123456789101:root"]' -var='kms_resource_principal_list=["arn:aws:iam::123456789101:root"]'`
+<!-- markdownlint-disable MD036 -->
+__`terraform plan`__
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -607,7 +885,7 @@ Terraform will perform the following actions:
   + resource "aws_kms_alias" "this" {
       + arn            = (known after apply)
       + id             = (known after apply)
-      + name           = "alias/rds/backup_bucket"
+      + name           = "alias/prod/s3"
       + target_key_arn = (known after apply)
       + target_key_id  = (known after apply)
     }
@@ -653,7 +931,7 @@ Terraform will perform the following actions:
                         ]
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = "arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyAdministrationPolicy"
@@ -668,7 +946,10 @@ Terraform will perform the following actions:
                         ]
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = [
+                            "arn:aws:iam::123456789101:role/AWS-RDS-Service-Role",
+                            "arn:aws:iam::123456789101:user/rnason"
+                          ]
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyUserPolicy"
@@ -688,7 +969,10 @@ Terraform will perform the following actions:
                         }
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "arn:aws:iam::123456789101:root"
+                          + AWS = [
+                            "arn:aws:iam::123456789101:role/AWS-RDS-Service-Role",
+                            "arn:aws:iam::123456789101:user/rnason"
+                          ]
                         }
                       + Resource  = "*"
                       + Sid       = "KMSKeyGrantPolicy"
@@ -710,9 +994,10 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-## Outputs
+<!-- markdownlint-disable MD025 -->
+# Outputs
 
-The template will finally create the following outputs that can be pulled and used in subsequent terraform runs via data sources. The outputs will be written to the terraform state file.
+The template will finally create the following outputs that can be pulled and used in subsequent terraform runs via data sources. The outputs will be written to the Terraform state file.
 
 <br>
 

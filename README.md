@@ -9,14 +9,14 @@
 
 This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server-side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project, which KMS Key policies should be placed on the KMS CMK at the time of provisioning.
 
-<br>
+<br><br>
 
 <!-- markdownlint-disable MD025 -->
 # Module Pre-Requisites
 
 None Defined
 
-<br>
+<br><br>
 
 <!-- markdownlint-disable MD025 -->
 # Module Usage
@@ -37,22 +37,24 @@ module "kms" {
 }
 ```
 
-<br>
+<br><br>
 
 <!-- markdownlint-disable MD025 -->
 # Variables
 
 The following variables are utilized by this module and cause the module to behave dynamically based upon the variables that are populated and passed into the module.
 
-<br>
+<br><br>
 
 ## :red_circle: kms_key_description
 
 <br>
 
-This variable should be passed containing a short description of what the provisioned KMS CMK will be used for.
-
 ![Required](images/neon_required.png)
+
+<br>
+
+This variable should be passed containing a short description of what the provisioned KMS CMK will be used for.
 
 <br><br>
 
@@ -79,9 +81,11 @@ kms_key_description = "KMS CMK used for encrypting all objects in the Prod S3 ba
 
 <br>
 
-This variable should be passed containing the desired alias assigned to the provisioned KMS CMK.
-
 ![Required](images/neon_required.png)
+
+<br>
+
+This variable should be passed containing the desired alias assigned to the provisioned KMS CMK.
 
  <br>
 
@@ -222,9 +226,13 @@ can't guarantee that exactly these actions will be performed if
 
 ## :large_blue_circle: kms_owner_principal_list
 
-This variable is used to define a list of users/roles that will be added to the KMS Key Owner policy statement. If the variable is not defined, then the key owner policy will be included to simply contain the account root user, allowing IAM the ability to assign key permissions using standard IAM policies. If a list of roles/users is defined, then the provided list will instead be used to define  the key owner principals. Typically this variable will only be used if the CMK will be shared and the key provisioner needs to make another AWS account a key owner to allow IAM policies in the other account to define permission for the provisioned shared key.
+<br>
 
 ![Required](images/neon_optional.png)
+
+<br>
+
+This variable is used to define a list of users/roles that will be added to the KMS Key Owner policy statement. If the variable is not defined, then the key owner policy will be included to simply contain the account root user, allowing IAM the ability to assign key permissions using standard IAM policies. If a list of roles/users is defined, then the provided list will instead be used to define  the key owner principals. Typically this variable will only be used if the CMK will be shared and the key provisioner needs to make another AWS account a key owner to allow IAM policies in the other account to define permission for the provisioned shared key.
 
 <br><br>
 
@@ -306,7 +314,7 @@ module "kms" {
 }
 ```
 
-<br>
+<br><br>
 
 <!-- markdownlint-disable MD036 -->
 __`terraform plan`__
@@ -386,11 +394,15 @@ can't guarantee that exactly these actions will be performed if
 
 ## :large_blue_circle: kms_admin_principal_list
 
+<br>
+
+![Required](images/neon_optional.png)
+
+<br>
+
 This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
-
-![Required](images/neon_optional.png)
 
 <br><br>
 
@@ -472,7 +484,7 @@ module "kms" {
 }
 ```
 
-<br>
+<br><br>
 
 <!-- markdownlint-disable MD036 -->
 __`terraform plan`__
@@ -569,17 +581,19 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
-<br><br>
+<br><br><br>
 
 ## :large_blue_circle: kms_user_principal_list
 
------
+<br>
+
+![Required](images/neon_optional.png)
+
+<br>
 
 This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including usage permissions to users/roles later by the key owner.
-
-![Required](images/neon_optional.png)
 
 <br><br>
 
@@ -768,17 +782,19 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
-<br><br>
+<br><br><br>
 
 ## :large_blue_circle: kms_resource_principal_list
 
------
+<br>
+
+![Required](images/neon_optional.png)
+
+<br>
 
 This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
 
 If this variable is left empty then the KMS Key resource policy **will not be included** into the KMS key policy. The account root owner, any defined key administrators, and any defined key users will still have their defined permissions, but no additional resources with grant permissions will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including resource permissions to users/roles later by the key owner.
-
-![Required](images/neon_optional.png)
 
 <br><br>
 
@@ -1021,6 +1037,8 @@ output "kms_key_alias" {}
 <!-- markdownlint-disable MD025 -->
 # Dependencies
 
+This module does not currently have any dependencies
+
 <br><br>
 
 <!-- markdownlint-disable MD025 -->
@@ -1029,6 +1047,8 @@ output "kms_key_alias" {}
 * [Terraform](https://www.terraform.io/)
 * [GIT](https://git-scm.com/download/win)
 * [AWS-Account](https://https://aws.amazon.com/)
+
+<br><br>
 
 <!-- markdownlint-disable MD025 -->
 # Recommended

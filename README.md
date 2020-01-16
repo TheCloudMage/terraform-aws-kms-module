@@ -42,11 +42,17 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
-## ![Required](images/required.png) <span style="position: absolute; top: -10px; font-size: 35px;"> &nbsp;&nbsp;&nbsp;&nbsp;kms_key_description</span>
+### :red_circle: kms_key_description
 
 This variable should be passed containing a short description of what the provisioned KMS key will be used for.
 
 <br>
+
+#### ![Required](images/required.png)
+
+<br>
+
+#### Usage
 
 ```terraform
 variable "kms_key_description" {
@@ -57,7 +63,9 @@ variable "kms_key_description" {
 
 <br><br>
 
-`EXAMPLE` : Include the following in your environments tfvars file
+#### `EXAMPLE`
+
+Include the following in your environments tfvars file
 
 ```terraform
 kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup bucket."

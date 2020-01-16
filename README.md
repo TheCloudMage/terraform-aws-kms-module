@@ -42,9 +42,10 @@ The following variables are utilized by this module and cause the module to beha
 
 <br>
 
-| <h2><b>kms_key_description</b></h2> | ![Required](images/required.png)  |
-| ----------------------------------- | --------------------------------: |
-| This variable should be passed containing a short description of what the provisioned KMS key will be used for. |
+| ![Required](images/required.png)    | <h2><b>kms_key_description</b></h2> |
+| -----                               | -----                               |
+
+This variable should be passed containing a short description of what the provisioned KMS key will be used for.
 
 <br>
 

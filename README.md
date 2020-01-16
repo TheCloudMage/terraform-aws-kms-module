@@ -57,7 +57,7 @@ variable "kms_key_description" {
 
 <br><br>
 
-<mark><b>EXAMPLE </b></mark>: Include the following in your environments tfvars file
+`EXAMPLE` : Include the following in your environments tfvars file
 
 ```terraform
 kms_key_description = "KMS CMK used for encrypting all objects in the RDS Backup bucket."

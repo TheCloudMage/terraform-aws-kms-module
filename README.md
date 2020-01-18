@@ -1,24 +1,24 @@
+<!-- markdownlint-disable MD024 -->
+<!-- markdownlint-disable MD025 -->
+<!-- markdownlint-disable MD036 -->
 # Terraform KMS Key Module
 
 ![Hero](images/tf_kms.png)  
 
 <br>
 
-<!-- markdownlint-disable MD025 -->
 # Getting Started
 
 This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server-side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project, which KMS Key policies should be placed on the KMS CMK at the time of provisioning.
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Module Pre-Requisites
 
 None Defined
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Module Usage
 
 ```terraform
@@ -39,7 +39,6 @@ module "kms" {
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Variables
 
 The following variables are utilized by this module and cause the module to behave dynamically based upon the variables that are populated and passed into the module.
@@ -93,7 +92,6 @@ This variable should be passed containing the desired alias assigned to the prov
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
@@ -105,7 +103,6 @@ variable "kms_key_alias_name" {
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Example .tfvars usage
 
 ```terraform
@@ -114,8 +111,21 @@ kms_key_alias_name = "prod/s3"
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Key Policy
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+}
+```
+
+<br><br>
+
+### Generated Key Policy
 
 Without defining any additional variables, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
@@ -133,26 +143,7 @@ Statement:
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Module Testing
-
-<!-- markdownlint-disable MD036 -->
-__main.tf__
-
-```terraform
-module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
-
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-  kms_key_alias_name        = "prod/s3"
-}
-```
-
-<br>
-
-<!-- markdownlint-disable MD036 -->
-__`terraform plan`__
+### `terraform plan`
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -228,7 +219,7 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-![Required](images/neon_optional.png)
+![Optional](images/neon_optional.png)
 
 <br>
 
@@ -236,7 +227,6 @@ This variable is used to define a list of users/roles that will be added to the 
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
@@ -249,7 +239,6 @@ variable "kms_owner_principal_list" {
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Example .tfvars usage
 
 ```terraform
@@ -262,8 +251,22 @@ kms_owner_principal_list = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Key Policy
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
+}
+```
+
+<br><br>
+
+### Generated Key Policy
 
 Without defining this variable a key policy with the following permissions will be created and applied to the requested KMS key:
 
@@ -298,26 +301,7 @@ Statement:
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Module Testing
-
-__main.tf__
-
-```terraform
-module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
-
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-  kms_key_alias_name        = "prod/s3"
-  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
-}
-```
-
-<br><br>
-
-<!-- markdownlint-disable MD036 -->
-__`terraform plan`__
+### `terraform plan`
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -396,7 +380,7 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-![Required](images/neon_optional.png)
+![Optional](images/neon_optional.png)
 
 <br>
 
@@ -406,7 +390,6 @@ If this variable is left empty then the KMS Key administrator policy **will not 
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
@@ -419,7 +402,6 @@ variable "kms_admin_principal_list" {
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Example .tfvars usage
 
 ```terraform
@@ -432,8 +414,25 @@ kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role",
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Key Policy
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+
+  //Optional
+  // kms_owner_principal_list    = []
+}
+```
+
+<br><br>
+
+### Generated Key Policy
 
 If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
@@ -465,29 +464,7 @@ Statement:
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Module Testing
-
-__main.tf__
-
-```terraform
-module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
-
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-  kms_key_alias_name        = "prod/s3"
-  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
-
-  //Optional
-  // kms_owner_principal_list    = []
-}
-```
-
-<br><br>
-
-<!-- markdownlint-disable MD036 -->
-__`terraform plan`__
+### `terraform plan`
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -587,7 +564,7 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-![Required](images/neon_optional.png)
+![Optional](images/neon_optional.png)
 
 <br>
 
@@ -597,7 +574,6 @@ If this variable is left empty then the KMS Key user policy **will not be includ
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
@@ -610,7 +586,6 @@ variable "kms_user_principal_list" {
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Example .tfvars usage
 
 ```terraform
@@ -623,8 +598,26 @@ kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role"
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Key Policy
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+  kms_user_principal_list   = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  
+  // Optional
+  // kms_owner_principal_list  = []
+}
+```
+
+<br><br>
+
+### Generated Key Policy
 
 If a list defining any IAM users/roles is defined into the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
@@ -647,30 +640,7 @@ Statement:
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Module Testing
-
-__main.tf__
-
-```terraform
-module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
-
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-  kms_key_alias_name        = "prod/s3"
-  kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
-  kms_user_principal_list   = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
-  
-  // Optional
-  // kms_owner_principal_list  = []
-}
-```
-
-<br><br>
-
-<!-- markdownlint-disable MD036 -->
-__`terraform plan`__
+### `terraform plan`
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -788,7 +758,7 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-![Required](images/neon_optional.png)
+![Optional](images/neon_optional.png)
 
 <br>
 
@@ -798,7 +768,6 @@ If this variable is left empty then the KMS Key resource policy **will not be in
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Declaration in variables.tf
 
 ```terraform
@@ -811,7 +780,6 @@ variable "kms_resource_principal_list" {
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
 ### Example .tfvars usage
 
 ```terraform
@@ -824,8 +792,27 @@ kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-R
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Key Policy
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name          = "prod/s3"
+  kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
+  kms_user_principal_list     = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
+  
+  // Optional
+  // kms_owner_principal_list  = []
+}
+```
+
+<br><br>
+
+### Generated Key Policy
 
 If a list defining any IAM users/roles is defined in the variable, a key policy with the following permissions will be created and applied to the requested KMS CMK:
 
@@ -851,31 +838,7 @@ Statement:
 
 <br><br>
 
-<!-- markdownlint-disable MD024 -->
-### Module Testing
-
-__main.tf__
-
-```terraform
-module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
-
-  // Required
-  kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-  kms_key_alias_name          = "prod/s3"
-  kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
-  kms_user_principal_list     = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
-  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
-  
-  // Optional
-  // kms_owner_principal_list  = []
-}
-```
-
-<br><br>
-
-<!-- markdownlint-disable MD036 -->
-__`terraform plan`__
+### `terraform plan`
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -1012,7 +975,6 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Outputs
 
 The template will finally create the following outputs that can be pulled and used in subsequent terraform runs via data sources. The outputs will be written to the Terraform state file.
@@ -1034,14 +996,12 @@ output "kms_key_alias" {}
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Dependencies
 
 This module does not currently have any dependencies
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Requirements
 
 * [Terraform](https://www.terraform.io/)
@@ -1050,7 +1010,6 @@ This module does not currently have any dependencies
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Recommended
 
 * [Terraform for VSCode](https://github.com/mauve/vscode-terraform)
@@ -1058,7 +1017,6 @@ This module does not currently have any dependencies
 
 <br><br>
 
-<!-- markdownlint-disable MD025 -->
 # Contributions and Contacts
 
 This project is owned by [CloudMage](rnason@cloudmage.io).

@@ -74,6 +74,20 @@ variable "kms_key_description" {
 kms_key_description = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
 ```
 
+<br><br>
+
+### Module Usage in main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name        = "prod/s3"
+}
+```
+
 <br><br><br>
 
 ## :red_circle: kms_key_alias_name

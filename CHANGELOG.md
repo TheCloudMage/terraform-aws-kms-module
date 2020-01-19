@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added kms_owner_principal_list variable to add the ability to customize the key owner.
+- Added `example` folder with project root example calling the module.
 
 ### Changed
 

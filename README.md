@@ -57,7 +57,7 @@ This variable should be passed containing a short description of what the provis
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_key_description" {
@@ -68,15 +68,7 @@ variable "kms_key_description" {
 
 <br><br>
 
-### Example .tfvars usage
-
-```terraform
-kms_key_description = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
-```
-
-<br><br>
-
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -106,7 +98,7 @@ This variable should be passed containing the desired alias assigned to the prov
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_key_alias_name" {
@@ -117,15 +109,7 @@ variable "kms_key_alias_name" {
 
 <br><br>
 
-### Example .tfvars usage
-
-```terraform
-kms_key_alias_name = "prod/s3"
-```
-
-<br><br>
-
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -157,7 +141,7 @@ Statement:
 
 <br><br>
 
-### `terraform plan`
+### Example `terraform plan` output
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -241,7 +225,7 @@ This variable is used to define a list of users/roles that will be added to the 
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_owner_principal_list" {
@@ -251,21 +235,13 @@ variable "kms_owner_principal_list" {
 }
 ```
 
-<br><br>
-
-### Example .tfvars usage
-
-```terraform
-kms_owner_principal_list = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
-```
-
 <br>
 
 > __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -274,7 +250,7 @@ module "kms" {
   // Required
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name        = "prod/s3"
-  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
+  kms_owner_principal_list  = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
 }
 ```
 
@@ -315,7 +291,7 @@ Statement:
 
 <br><br>
 
-### `terraform plan`
+### Example `terraform plan` output
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -404,7 +380,7 @@ If this variable is left empty then the KMS Key administrator policy **will not 
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_admin_principal_list" {
@@ -414,21 +390,13 @@ variable "kms_admin_principal_list" {
 }
 ```
 
-<br><br>
-
-### Example .tfvars usage
-
-```terraform
-kms_admin_principal_list = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role", "arn:aws:iam::123456789101:user/kms_admin"]
-```
-
 <br>
 
 > __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -478,7 +446,7 @@ Statement:
 
 <br><br>
 
-### `terraform plan`
+### Example `terraform plan` output
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -588,7 +556,7 @@ If this variable is left empty then the KMS Key user policy **will not be includ
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_user_principal_list" {
@@ -598,21 +566,13 @@ variable "kms_user_principal_list" {
 }
 ```
 
-<br><br>
-
-### Example .tfvars usage
-
-```terraform
-kms_user_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
-```
-
 <br>
 
 > __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -654,7 +614,7 @@ Statement:
 
 <br><br>
 
-### `terraform plan`
+### Example `terraform plan` output
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -782,7 +742,7 @@ If this variable is left empty then the KMS Key resource policy **will not be in
 
 <br><br>
 
-### Declaration in variables.tf
+### Declaration in module variables.tf
 
 ```terraform
 variable "kms_resource_principal_list" {
@@ -792,21 +752,13 @@ variable "kms_resource_principal_list" {
 }
 ```
 
-<br><br>
-
-### Example .tfvars usage
-
-```terraform
-kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-SomeAuthApp-Role"]
-```
-
 <br>
 
 > __Note:__ You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### Module Usage in main.tf
+### Module usage in project root main.tf
 
 ```terraform
 module "kms" {
@@ -852,7 +804,7 @@ Statement:
 
 <br><br>
 
-### `terraform plan`
+### Example `terraform plan` output
 
 ```terraform
 Refreshing Terraform state in-memory prior to plan...
@@ -989,7 +941,13 @@ can't guarantee that exactly these actions will be performed if
 
 <br><br>
 
-# Outputs
+# Module Example Usage
+
+An example of how to use this module can be found within the `example` directory of this repository
+
+<br><br>
+
+# Module Outputs
 
 The template will finally create the following outputs that can be pulled and used in subsequent terraform runs via data sources. The outputs will be written to the Terraform state file.
 
@@ -1007,6 +965,38 @@ output "kms_key_id" {}
 ######################
 output "kms_key_alias" {}
 ```
+
+<br><br>
+
+# Module Output Usage
+
+When using and calling the module within a root project, the output values of the module are available to the project root by simply referencing the module outputs from the root project `outputs.tf` file.
+
+<br>
+
+```terraform
+######################
+# KMS Key:           #
+######################
+output "cmk_arn" {
+  value = module.kms.kms_key_arn
+}
+
+output "cmk_id" {
+  value = module.kms.kms_key_id
+}
+
+######################
+# KMS Key Alias:     #
+######################
+output "cmk_alias" {
+  value = module.kms.kms_key_alias
+}
+```
+
+<br>
+
+> __Note:__ When referencing the module outputs be sure that the output value contains the identifier given to the module call. As an example if the module was defined as `module "demo_cmk" {}` then the output reference would be constructed as `module.demo_cmk.kms_key_arn`.
 
 <br><br>
 

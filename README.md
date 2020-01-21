@@ -1,6 +1,5 @@
-<!-- markdownlint-disable MD024 -->
-<!-- markdownlint-disable MD025 -->
-<!-- markdownlint-disable MD036 -->
+<!-- VSCode Markdown Exclusions-->
+<!-- markdownlint-disable MD025 Single Title Headers-->
 # Terraform KMS Key Module
 
 ![Hero](images/tf_kms.png)  
@@ -9,13 +8,13 @@
 
 # Getting Started
 
-This Terraform module is designed to produce a secure AWS Key Management Service (KMS) Customer Managed Key (CMK) that can be used for server-side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data that requires encryption is stored. This module was created with dynamic options that allow the consumer of the module to determine project by project, which KMS Key policies should be placed on the KMS CMK at the time of provisioning.
+This Terraform module was created to quickly and easily provision a secure AWS Key Management Service (KMS) Customer Managed Key (CMK). CMK's are used for server-side encryption on AWS services such as S3 buckets, EBS volumes, Dynamo DB Tables, or any other service where data encryption is required. This module also includes optional variables that allow the consumer of the module to choose how KMS Key policies will be constructed and placed on be the CMK at the time of provisioning.
 
 <br><br>
 
-# Module Pre-Requisites
+# Module Pre-Requisites and Dependencies
 
-None Defined
+This module does not currently have any pre-requisites or dependency requirements.
 
 <br><br>
 
@@ -25,62 +24,84 @@ None Defined
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.1"
 
-  // Required
+  // Required Variables
   kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"
   kms_key_alias_name        = "prod/s3"
   
-  // Optional
-  kms_owner_principal_list    = ["arn:aws:iam::123456789101::root"]
-  kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
-  kms_user_principal_list     = ["arn:aws:iam::123456789101:user/cloudmage"]
-  kms_resource_principal_list = ["arn:aws:iam::123456789101:role/cloudmage"]
+  // Optional Variables with module defined default values assigned
+  # kms_owner_principal_list    = []
+  # kms_admin_principal_list    = []
+  # kms_user_principal_list     = []
+  # kms_resource_principal_list = []
 }
 ```
 
 <br><br>
 
-# Variables
+# Terraform Variables
 
-The following variables are utilized by this module and cause the module to behave dynamically based upon the variables that are populated and passed into the module.
-
-<br><br>
-
-## :red_circle: kms_key_description
+Module variables that need to either be defined or re-defined with a non-default value can easily be hardcoded inline directly within the module call block or from within the root project that is consuming the module. If using the second approach then the root project must have it's own custom variables defined within the projects `variables.tf` file with set default values or with the values provided from a separate environmental `terraform.tfvar` file. Examples of both approaches can be found below. Note that for the standards used within this documentation, all variables will mostly use the first approach for ease of readability.
 
 <br>
 
-![Required](images/neon_required.png)
-
-<br>
-
-This variable should be passed containing a short description of what the provisioned KMS CMK will be used for.
+> __NOTE:__ There is also a third way to provide variable values using Terraform data sources. A data source is a unique type of code block used within a project that either instantiates or collects data that can be referenced throughout the project. A data source, for example,  can be declared to read the terraform state file and gather all of the available information from a previously deployed project stack. Any of the data contained within the data source can then be referenced to set the value of a project or module variable.
 
 <br><br>
 
-### Declaration in module variables.tf
-
-```terraform
-variable "kms_key_description" {
-  type        = string
-  description = "The description that will be applied to the provisioned KMS Key."
-}
-```
-
-<br><br>
-
-### Module usage in project root main.tf
+## Setting Variables Inline
 
 ```terraform
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  // Required Variables
   kms_key_alias_name        = "prod/s3"
 }
 ```
 
-<br><br><br>
+<br><br>
+
+## Setting Variables in a Terraform Root Project
+
+<br>
+
+### Terraform Root Project/variables.tf
+
+```terraform
+variable "cmk_alias" {
+  type        = string
+  description = "Meaningful Description"
+}
+```
+
+<br>
+
+### Terraform Root Project/terraform.tfvars
+
+```terraform
+cmk_alias = "dev/ebs"
+```
+
+<br>
+
+### Terraform Root Project/main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required Variables
+  kms_key_alias_name = var.cmk_alias
+}
+```
+
+<br><br>
+
+# Required Variables
+
+The following required module variables do not contain default values and must be set by the consumer of the module to use the module successfully.
+
+<br><br>
 
 ## :red_circle: kms_key_alias_name
 
@@ -90,7 +111,7 @@ module "kms" {
 
 <br>
 
-This variable should be passed containing the desired alias assigned to the provisioned KMS CMK.
+This variable should be passed containing the desired key alias that will be assigned to the provisioned KMS CMK for its value.
 
  <br>
 
@@ -115,17 +136,59 @@ variable "kms_key_alias_name" {
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
-  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  // Required Variables
   kms_key_alias_name        = "prod/s3"
+}
+```
+
+<br><br><br>
+
+## :red_circle: kms_key_description
+
+<br>
+
+![Required](images/neon_required.png)
+
+<br>
+
+This variable should be passed containing a short description of what the provisioned KMS CMK will be used for as its value.
+
+<br><br>
+
+### Declaration in module variables.tf
+
+```terraform
+variable "kms_key_description" {
+  type        = string
+  description = "The description that will be applied to the provisioned KMS Key."
 }
 ```
 
 <br><br>
 
+### Module usage in project root main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+
+  // Required Variables
+  kms_key_alias_name        = "prod/s3"
+  kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+}
+```
+
+<br><br><br>
+
+## Base Module Execution
+
+Once all of the modules required values have been assigned, then the module can be executed in its base capacity.
+
+<br><br>
+
 ### Generated Key Policy
 
-Without defining any additional variables, a key policy with the following permissions will be created and applied to the requested KMS CMK:
+Without defining values for any optional module variables, a key policy with the following permissions will be created automatically and applied to the requested KMS CMK during module execution. Note that the module uses the `data "aws_caller_identity" "current" {}` data source to obtain the account id of the account that the root project was executed against and will use that value to automatically generate the root user ARN specified in the CMK Owner Policy.
 
 ```yaml
 Statement:
@@ -211,7 +274,13 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
-<br><br><br>
+<br><br>
+
+# Optional Variables
+
+The following optional module variables are not required because they already have default values assigned when the variables where defined within the modules `variables.tf` file. If the default values do not need to be changed by the root project consuming the module, then they do not even need to be included in the root project. If any of the variables do need to be changed, then they can be added to the root project in the same way that the required variables were defined and utilized. Optional variables also may alter how the module provisions resources in the cases of encryption or IAM policy generation. A variable could flag an encryption requirement when provisioning an S3 bucket or Dynamo table by providing a KMS CMK, for example. Another use case may be the passage of ARN values to allow users or roles access to services or resources, whereas by default permissions would be more restrictive or only assigned to the account root or a single IAM role. A detailed explanation of each of this modules optional variables can be found below:
+
+<br><br>
 
 ## :large_blue_circle: kms_owner_principal_list
 
@@ -221,7 +290,11 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-This variable is used to define a list of users/roles that will be added to the KMS Key Owner policy statement. If the variable is not defined, then the key owner policy will be included to simply contain the account root user, allowing IAM the ability to assign key permissions using standard IAM policies. If a list of roles/users is defined, then the provided list will instead be used to define  the key owner principals. Typically this variable will only be used if the CMK will be shared and the key provisioner needs to make another AWS account a key owner to allow IAM policies in the other account to define permission for the provisioned shared key.
+This variable is used to define a list of users/roles that will be added to the KMS Key Owner policy statement. If the variable is not defined, then the key owner policy will be included to contain the account root user, allowing IAM the ability to assign key permissions using standard IAM policies. If a list of roles/users is defined, then the provided list will instead be used to determine the key owner principals. Typically this variable will only be used if the CMK will be shared, and the key provisioner needs to make another AWS account a key owner to allow IAM policies in the other account to define permission for the provisioned shared key.
+
+<br>
+
+> __Note:__ The key owner policy statement determines what users/roles own the provisioned KMS key. Owners have `kms:*` permissions on the CMK. They can perform any action on the key including performing any modifications to the key and the key policy.
 
 <br><br>
 
@@ -247,7 +320,7 @@ variable "kms_owner_principal_list" {
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
+  // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name        = "prod/s3"
   kms_owner_principal_list  = ["arn:aws:iam::123456789101::root", "arn:aws:iam::109876543210::root"]
@@ -374,9 +447,11 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key Administrator policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key Administrator policy statement block. If a list of roles/users (including a list of a single user or role) is provided, then a KMS key Administrator policy will be generated automatically and appended to the key policy that will be applied to the provisioned CMK. If this variable is left empty or not included in the module call, then the KMS key administrator policy statement **will not be included** in the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will be added. IAM policies can be constructed post key creation in order to grant permissions, including administration permissions to users/roles later by the key owner.
 
-If this variable is left empty then the KMS Key administrator policy **will not be included** into the KMS key policy. The account root owner will still have kms:* permissions, but no additional administrators will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including administration permissions to users/roles later by the key owner.
+<br>
+
+> __Note:__ The key administrator policy statement determines what users/roles have administrative rights on the provisioned KMS key. Key administrators can modify the key and the key policy, but they are not granted usage of the key, or the ability to manage grants for the key. If a key administrator requires usage permissions, then they would also need to be added to the key usage policy statement.
 
 <br><br>
 
@@ -402,7 +477,7 @@ variable "kms_admin_principal_list" {
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
+  // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name        = "prod/s3"
   kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
@@ -550,9 +625,11 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-This variable is used to define a list of users/roles that will be added to the KMS Key user policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key user policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key usage policy statement block. If a list of roles/users (including a list of a single user or role) is provided, then a KMS key usage policy will be generated automatically and appended to the key policy that will be applied to the provisioned CMK. If this variable is left empty or not included in the module call, then the KMS key usage policy statement **will not be included** in the KMS key policy. The account root owner will still have kms:* permissions, but no additional key users will be added. IAM policies can be constructed post key creation in order to grant permissions, including key usage permissions to users/roles later by the key owner or a key administrator.
 
-If this variable is left empty then the KMS Key user policy **will not be included** into the KMS key policy. The account root owner and any defined key administrators will still have their defined permissions, but no additional users will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including usage permissions to users/roles later by the key owner.
+<br>
+
+> __Note:__ The key usage policy statement determines what users/roles have rights to encrypt, decrypt, re-encrypt, and generate data key operations with the provisioned CMK. Any users/roles that are included in this policy statement have no other rights on the key unless they are also added to one of the other key policy statement blocks also.
 
 <br><br>
 
@@ -578,13 +655,13 @@ variable "kms_user_principal_list" {
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
+  // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name        = "prod/s3"
   kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
   kms_user_principal_list   = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
   
-  // Optional
+  // Optional Variables with module defined default values assigned
   // kms_owner_principal_list  = []
 }
 ```
@@ -736,9 +813,11 @@ can't guarantee that exactly these actions will be performed if
 
 <br>
 
-This variable is used to define a list of users/roles that will be added to the KMS Key resource policy statement. If a list of roles/users, including a list of a single role/user, is defined, then the KMS Key resource policy will be included in the returned KMS Key applied permissions policy.
+This variable is used to define a list of users/roles that will be added to the KMS Key resource grant policy statement block. If a list of roles/users (including a list of a single user or role) is provided, then a KMS key resource grant policy will be generated automatically and appended to the key policy that will be applied to the provisioned CMK. If this variable is left empty or not included in the module call, then the KMS key resource grant policy statement **will not be included** in the KMS key policy. The account root owner will still have kms:* permissions, but no additional key resource grant permissions will be added. IAM policies can be constructed post key creation in order to grant permissions, including key grantee permissions to users/roles later by the key owner or a key administrator.
 
-If this variable is left empty then the KMS Key resource policy **will not be included** into the KMS key policy. The account root owner, any defined key administrators, and any defined key users will still have their defined permissions, but no additional resources with grant permissions will immediately be defined. IAM policies can be defined post key creation, in order to grant permissions including resource permissions to users/roles later by the key owner.
+<br>
+
+> __Note:__ The key resource grant policy statement determines what users/roles have rights to list, create, and revoke grants on the provisioned CMK. Key grants are a way of providing usage of the CMK temporarily. A user/role that has key grant or resource rights is allowed to grant applications, services, or resources a limited time pass to use the CMK and then revoke that pass when the application, service, or resource has completed the operation that required access to the key. No other rights on the key are given unless the user/role is also added to one of the other key policy statement blocks also.
 
 <br><br>
 
@@ -764,14 +843,14 @@ variable "kms_resource_principal_list" {
 module "kms" {
   source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
-  // Required
+  // Required Variables
   kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name          = "prod/s3"
   kms_admin_principal_list    = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
   kms_user_principal_list     = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
   kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
   
-  // Optional
+  // Optional Variables with module defined default values assigned
   // kms_owner_principal_list  = []
 }
 ```
@@ -944,6 +1023,89 @@ can't guarantee that exactly these actions will be performed if
 # Module Example Usage
 
 An example of how to use this module can be found within the `example` directory of this repository
+
+<br><br>
+
+# Variables and TFVars File Templates
+
+The following code block can be used or appended to an existing tfvars file within the project root consuming this module. Optional Variables are commented out and have their values set to the default values defined in the modules variables.tf file. If the values do not need to be changed, then they do not need to be redefined in the project root. If they do need to be changed, then include them in the root project and change the values accordingly.
+
+<br><br>
+
+## Complete Module variables.tf File
+
+```terraform
+###########################################################################
+# Required KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables require consumer defined values to be provided. #
+###########################################################################
+variable "kms_key_description" {
+  type        = string
+  description = "The description that will be applied to the provisioned KMS Key."
+}
+variable "kms_key_alias_name" {
+  type        = string
+  description = "The alias that will be assigned to the provisioned KMS CMK. This value will be appended to alias/ within the module automatically."
+}
+
+###########################################################################
+# Optional KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables have default values already set by the module.  #
+# They will not need to be included in a project root module variables.tf #
+# file unless a non-default value needs be assigned to the variable.      #
+###########################################################################
+variable "kms_owner_principal_list" {
+  type        = list
+  description = "List of users/roles/accounts that will own and have kms:* on the provisioned CMK."
+  default     = []
+}
+
+variable "kms_admin_principal_list" {
+  type        = list
+  description = "List of users/roles that will be key administrators of the provisioned KMS CMK"
+  default     = []
+}
+
+variable "kms_user_principal_list" {
+  type        = list
+  description = "List of users/roles that will be granted usage of the provisioned KMS CMK."
+  default     = []
+}
+
+variable "kms_resource_principal_list" {
+  type        = list
+  description = "List of users/roles that will be granted permissions to create/list/delete temporary grants to the provisioned KMS CMK."
+  default     = []
+}
+```
+
+<br><br>
+
+## Complete Module TFVars File
+
+```terraform
+###########################################################################
+# Required KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables require consumer defined values to be provided. #
+###########################################################################
+kms_key_description          = "Value Required"
+kms_key_alias_name           = "value/required"
+
+###########################################################################
+# Optional KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables have default values already set by the module.  #
+# They will not need to be included in a project root module variables.tf #
+# file unless a non-default value needs be assigned to the variable.      #
+###########################################################################
+kms_owner_principal_list    = []
+kms_admin_principal_list    = []
+kms_user_principal_list     = []
+kms_resource_principal_list = []
+```
 
 <br><br>
 

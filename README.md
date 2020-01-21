@@ -1117,14 +1117,10 @@ The template will finally create the following outputs that can be pulled and us
 
 ```terraform
 ######################
-# KMS Key:           #
+# KMS Key Outputs:   #
 ######################
-output "kms_key_arn" {}
 output "kms_key_id" {}
-
-######################
-# KMS Key Alias:     #
-######################
+output "kms_key_arn" {}
 output "kms_key_alias" {}
 ```
 
@@ -1138,19 +1134,14 @@ When using and calling the module within a root project, the output values of th
 
 ```terraform
 ######################
-# KMS Key:           #
+# KMS Key Outputs:   #
 ######################
-output "cmk_arn" {
-  value = module.kms.kms_key_arn
-}
-
 output "cmk_id" {
   value = module.kms.kms_key_id
 }
-
-######################
-# KMS Key Alias:     #
-######################
+output "cmk_arn" {
+  value = module.kms.kms_key_arn
+}
 output "cmk_alias" {
   value = module.kms.kms_key_alias
 }

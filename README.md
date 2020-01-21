@@ -22,7 +22,7 @@ This module does not currently have any pre-requisites or dependency requirement
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.1"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
 
   // Required Variables
   kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"

@@ -1,19 +1,35 @@
+###########################################################################
+# Terraform Config Vars:                                                  #
+###########################################################################
 variable "provider_region" {
   type        = string
   description = "AWS region to use when making calls to the AWS provider."
   default     = "us-east-1"
 }
 
+
+###########################################################################
+# Required KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables require consumer defined values to be provided. #
+###########################################################################
 variable "cmk_description" {
   type        = string
   description = "Description of what this CMK will be used for."
 }
-
 variable "cmk_alias" {
   type        = string
   description = "Alias assigned to this CMK."
 }
 
+
+###########################################################################
+# Optional KMS CMK Module Vars:                                           #
+#-------------------------------------------------------------------------#
+# The following variables have default values already set by the module.  #
+# They will not need to be included in a project root module variables.tf #
+# file unless a non-default value needs be assigned to the variable.      #
+###########################################################################
 variable "cmk_owners" {
   type        = list(string)
   description = "Owners of the Demo CMK."

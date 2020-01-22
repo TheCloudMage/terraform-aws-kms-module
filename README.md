@@ -1057,6 +1057,12 @@ variable "kms_tags" {
 }
 ```
 
+<br>
+
+![KMS Key Tags](images/tf_kms_tags.png)
+
+<br>
+
 <br><br>
 
 ### Module usage in project root main.tf
@@ -1115,6 +1121,7 @@ variable "kms_key_alias_name" {
   description = "The alias that will be assigned to the provisioned KMS CMK. This value will be appended to alias/ within the module automatically."
 }
 
+
 ###########################################################################
 # Optional KMS CMK Module Vars:                                           #
 #-------------------------------------------------------------------------#
@@ -1168,6 +1175,7 @@ variable "kms_tags" {
 ###########################################################################
 kms_key_description          = "Value Required"
 kms_key_alias_name           = "value/required"
+
 
 ###########################################################################
 # Optional KMS CMK Module Vars:                                           #

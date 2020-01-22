@@ -37,7 +37,7 @@ module "kms" {
   // Tags
   # kms_tags                    = {
   #   Provisoned_By  = "Terraform"
-  #   GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  #   Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   # }
 }
 ```
@@ -1052,7 +1052,7 @@ variable "kms_tags" {
   description = "Specify any tags that should be added to the KMS CMK being provisioned."
   default     = {
     Provisoned_By  = "Terraform"
-    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }
 ```
@@ -1072,7 +1072,7 @@ module "kms" {
   // Tags
   kms_tags = {
      Provisoned_By  = "Terraform"
-     GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+     Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
      Environment    = "Prod"
    }
   
@@ -1151,7 +1151,7 @@ variable "kms_tags" {
   description = "Specify any tags that should be added to the KMS CMK being provisioned."
   default     = {
     Provisoned_By  = "Terraform"
-    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }
 ```
@@ -1183,7 +1183,7 @@ kms_resource_principal_list = []
 
 kms_tags        = {
     Provisoned_By  = "Terraform"
-    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
 }
 ```
 

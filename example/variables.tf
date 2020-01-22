@@ -60,6 +60,6 @@ variable "cmk_tags" {
   description = "Specify any tags that should be added to the KMS CMK being provisioned."
   default     = {
     Provisoned_By  = "Terraform"
-    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }

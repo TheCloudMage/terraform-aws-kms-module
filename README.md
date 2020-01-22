@@ -1057,11 +1057,9 @@ variable "kms_tags" {
 }
 ```
 
-<br>
+<br><br>
 
 ![KMS Key Tags](images/tf_kms_tags.png)
-
-<br>
 
 <br><br>
 

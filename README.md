@@ -22,7 +22,7 @@ This module does not currently have any pre-requisites or dependency requirement
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"
@@ -33,6 +33,12 @@ module "kms" {
   # kms_admin_principal_list    = []
   # kms_user_principal_list     = []
   # kms_resource_principal_list = []
+  
+  // Tags
+  # kms_tags                    = {
+  #   Provisoned_By  = "Terraform"
+  #   GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  # }
 }
 ```
 
@@ -52,7 +58,7 @@ Module variables that need to either be defined or re-defined with a non-default
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_alias_name        = "prod/s3"
@@ -88,7 +94,7 @@ cmk_alias = "dev/ebs"
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_alias_name = var.cmk_alias
@@ -134,7 +140,7 @@ variable "kms_key_alias_name" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_alias_name        = "prod/s3"
@@ -170,7 +176,7 @@ variable "kms_key_description" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_alias_name        = "prod/s3"
@@ -318,7 +324,7 @@ variable "kms_owner_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -475,15 +481,15 @@ variable "kms_admin_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
   kms_key_alias_name        = "prod/s3"
   kms_admin_principal_list  = ["arn:aws:iam::123456789101:role/AWS-KMS-Admin-Role"]
 
-  //Optional
-  // kms_owner_principal_list    = []
+  // Optional Variables with module defined default values assigned
+  # kms_owner_principal_list    = []
 }
 ```
 
@@ -653,7 +659,7 @@ variable "kms_user_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -662,7 +668,7 @@ module "kms" {
   kms_user_principal_list   = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
   
   // Optional Variables with module defined default values assigned
-  // kms_owner_principal_list  = []
+  # kms_owner_principal_list  = []
 }
 ```
 
@@ -841,7 +847,7 @@ variable "kms_resource_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
 
   // Required Variables
   kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -851,7 +857,7 @@ module "kms" {
   kms_resource_principal_list = ["arn:aws:iam::123456789101:role/AWS-RDS-Service-Role", "arn:aws:iam::123456789101:user/rnason"]
   
   // Optional Variables with module defined default values assigned
-  // kms_owner_principal_list  = []
+  # kms_owner_principal_list  = []
 }
 ```
 
@@ -1018,6 +1024,66 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
+<br><br><br>
+
+## :large_blue_circle: kms_tags
+
+<br>
+
+![Optional](images/neon_optional.png)
+
+<br>
+
+This variable should contain a map of tags that will be assigned to the KMS CMK upon creation. Any tags contained within the `kms_tags` map variable will be passed to the module and automatically merged with a few tags that are also automatically created when the module is executed. The automatically generated tags are as follows:
+
+- __Name__ - This tag is assigned the value from the `kms_key_alias_name` required variable that is passed during module execution
+- __Created_By__ - This tag is assigned the value of the aws user that was used to execute the Terraform module to create the KMS CMK. It uses the Terraform `aws_caller_identity {}` data source provider to obtain the User_Id value. This tag will be ignored for any future executions of the module, ensuring that its value will not be changed after it's initial creation.
+- __Creator_ARN__ - This tag is assigned the ARN value of the aws user that was used to execute the Terraform module to create the EFS file system. It uses the Terraform `aws_caller_identity {}` data source provider to obtain the User_ARN value. This tag will be ignored for any future executions of the module, ensuring that its value will not be changed after it's initial creation.
+- __Creation_Date__ - This tag is assigned a value that is obtained by the Terraform `timestamp()` function. This tag will be ignored for any future executions of the module, ensuring that its value will not be changed after it's initial creation.
+- __Updated_On__ - This tag is assigned a value that is obtained by the Terraform `timestamp()` function. This tag will be updated on each future execution of the module to ensure that it's value displays the last `terraform apply` date.
+
+<br><br>
+
+### Declaration in module variables.tf
+
+```terraform
+variable "kms_tags" {
+  type        = map
+  description = "Specify any tags that should be added to the KMS CMK being provisioned."
+  default     = {
+    Provisoned_By  = "Terraform"
+    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  }
+}
+```
+
+<br><br>
+
+### Module usage in project root main.tf
+
+```terraform
+module "kms" {
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+
+  // Required Variables
+  kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
+  kms_key_alias_name          = "prod/s3"
+  
+  // Tags
+  kms_tags = {
+     Provisoned_By  = "Terraform"
+     GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+     Environment    = "Prod"
+   }
+  
+  // Optional Variables with module defined default values assigned
+  # kms_owner_principal_list    = []
+  # kms_admin_principal_list    = []
+  # kms_user_principal_list     = []
+  # kms_resource_principal_list = []
+}
+```
+
 <br><br>
 
 # Module Example Usage
@@ -1079,6 +1145,15 @@ variable "kms_resource_principal_list" {
   description = "List of users/roles that will be granted permissions to create/list/delete temporary grants to the provisioned KMS CMK."
   default     = []
 }
+
+variable "kms_tags" {
+  type        = map
+  description = "Specify any tags that should be added to the KMS CMK being provisioned."
+  default     = {
+    Provisoned_By  = "Terraform"
+    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  }
+}
 ```
 
 <br><br>
@@ -1105,6 +1180,11 @@ kms_owner_principal_list    = []
 kms_admin_principal_list    = []
 kms_user_principal_list     = []
 kms_resource_principal_list = []
+
+kms_tags        = {
+    Provisoned_By  = "Terraform"
+    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+}
 ```
 
 <br><br>
@@ -1139,9 +1219,11 @@ When using and calling the module within a root project, the output values of th
 output "cmk_id" {
   value = module.kms.kms_key_id
 }
+
 output "cmk_arn" {
   value = module.kms.kms_key_arn
 }
+
 output "cmk_alias" {
   value = module.kms.kms_key_alias
 }
@@ -1153,34 +1235,28 @@ output "cmk_alias" {
 
 <br><br>
 
-# Dependencies
-
-This module does not currently have any dependencies
-
-<br><br>
-
 # Requirements
 
-* [Terraform](https://www.terraform.io/)
-* [GIT](https://git-scm.com/download/win)
-* [AWS-Account](https://https://aws.amazon.com/)
+- [Terraform](https://www.terraform.io/)
+- [GIT](https://git-scm.com/download/win)
+- [AWS-Account](https://https://aws.amazon.com/)
 
 <br><br>
 
 # Recommended
 
-* [Terraform for VSCode](https://github.com/mauve/vscode-terraform)
-* [Terraform Config Inspect](https://github.com/hashicorp/terraform-config-inspect)
+- [Terraform for VSCode](https://github.com/mauve/vscode-terraform)
+- [Terraform Config Inspect](https://github.com/hashicorp/terraform-config-inspect)
 
 <br><br>
 
-# Contributions and Contacts
+# Contacts and Contributions
 
 This project is owned by [CloudMage](rnason@cloudmage.io).
 
 To contribute, please:
 
-* Fork the project
-* Create a local branch
-* Submit Changes
-* Create A Pull Request
+- Fork the project
+- Create a local branch
+- Submit Changes
+- Create A Pull Request

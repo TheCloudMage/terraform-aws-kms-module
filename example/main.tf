@@ -21,8 +21,9 @@ module "demo_cmk" {
   kms_key_alias_name        = var.cmk_alias
   
   // Optional
-  // kms_owner_principal_list    = var.cmk_owners
-  // kms_admin_principal_list    = var.cmk_admins
-  // kms_user_principal_list     = var.cmk_users
-  // kms_resource_principal_list = var.cmk_grantees
+  # kms_owner_principal_list    = var.cmk_owners
+  # kms_admin_principal_list    = var.cmk_admins
+  # kms_user_principal_list     = var.cmk_users
+  # kms_resource_principal_list = var.cmk_grantees
+  # kms_tags                    = var.cmk_tags
 }

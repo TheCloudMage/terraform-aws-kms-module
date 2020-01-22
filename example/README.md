@@ -1,6 +1,3 @@
-<!-- markdownlint-disable MD024 -->
-<!-- markdownlint-disable MD025 -->
-<!-- markdownlint-disable MD036 -->
 # Terraform KMS Key Module Example
 
 ## Getting Started

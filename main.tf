@@ -12,6 +12,23 @@ resource "aws_kms_key" "this" {
   is_enabled              = true
   enable_key_rotation     = true
   policy                  = data.aws_iam_policy_document.this.json
+
+  // Set the Name tag, and add Created_By, Creation_Date, and Creator_ARN tags with ignore change lifecycle policy.
+  // Allow Updated_On to update on each exectuion.
+  tags = merge(
+    var.kms_tags,
+    {
+      Name            = lower(format("%s", var.kms_key_alias_name)),
+      Created_By      = data.aws_caller_identity.current.user_id
+      Creator_ARN     = data.aws_caller_identity.current.arn
+      Creation_Date   = timestamp()
+      Updated_On      = timestamp()
+    }
+  )
+
+  lifecycle {
+    ignore_changes = [tags["Created_By"], tags["Creation_Date"], tags["Creator_ARN"]]
+  }
 }
 
 ######################

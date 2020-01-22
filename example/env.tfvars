@@ -8,8 +8,8 @@
 #-------------------------------------------------------------------------#
 # The following variables require consumer defined values to be provided. #
 ###########################################################################
-cmk_description = "CMK that will be used to encrypt all of the EBS goodness."
 cmk_alias       = "cmk/ebs"
+cmk_description = "CMK that will be used to encrypt all of the EBS goodness."
 
 
 ###########################################################################
@@ -23,3 +23,7 @@ cmk_owners      = []
 cmk_admins      = ["arn:aws:iam::123456789101:root"]
 cmk_users       = ["arn:aws:iam::123456789101:root"]
 cmk_grantees    = ["arn:aws:iam::123456789101:root"]
+cmk_tags        = {
+    Provisoned_By  = "Terraform"
+    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+}

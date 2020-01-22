@@ -13,13 +13,14 @@ variable "provider_region" {
 #-------------------------------------------------------------------------#
 # The following variables require consumer defined values to be provided. #
 ###########################################################################
-variable "cmk_description" {
-  type        = string
-  description = "Description of what this CMK will be used for."
-}
 variable "cmk_alias" {
   type        = string
   description = "Alias assigned to this CMK."
+}
+
+variable "cmk_description" {
+  type        = string
+  description = "Description of what this CMK will be used for."
 }
 
 
@@ -52,4 +53,13 @@ variable "cmk_grantees" {
   type        = list(string)
   description = "Resource Grantees of the Demo CMK."
   default     = []
+}
+
+variable "cmk_tags" {
+  type        = map
+  description = "Specify any tags that should be added to the KMS CMK being provisioned."
+  default     = {
+    Provisoned_By  = "Terraform"
+    GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  }
 }

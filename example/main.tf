@@ -14,7 +14,7 @@ provider "aws" {
 
 // Create the required KMS Key
 module "demo_cmk" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.2"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.4"
 
   // Required Examples
   kms_key_description       = var.cmk_description

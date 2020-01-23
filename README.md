@@ -22,7 +22,7 @@ This module does not currently have any pre-requisites or dependency requirement
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description       = "KMS key provisioned to encrypt prod s3 bucket"
@@ -36,8 +36,8 @@ module "kms" {
   
   // Tags
   # kms_tags                    = {
-  #   Provisoned_By  = "Terraform"
-  #   Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+  #   Provisioned_By    = "Terraform"
+  #   Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   # }
 }
 ```
@@ -58,10 +58,10 @@ Module variables that need to either be defined or re-defined with a non-default
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
-  kms_key_alias_name        = "prod/s3"
+  kms_key_alias_name = "prod/s3"
 }
 ```
 
@@ -94,7 +94,7 @@ cmk_alias = "dev/ebs"
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_alias_name = var.cmk_alias
@@ -140,7 +140,7 @@ variable "kms_key_alias_name" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_alias_name        = "prod/s3"
@@ -176,7 +176,7 @@ variable "kms_key_description" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_alias_name        = "prod/s3"
@@ -324,7 +324,7 @@ variable "kms_owner_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -481,7 +481,7 @@ variable "kms_admin_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -659,7 +659,7 @@ variable "kms_user_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description       = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -847,7 +847,7 @@ variable "kms_resource_principal_list" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -1051,8 +1051,8 @@ variable "kms_tags" {
   type        = map
   description = "Specify any tags that should be added to the KMS CMK being provisioned."
   default     = {
-    Provisoned_By  = "Terraform"
-    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Provisioned_By    = "Terraform"
+    Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }
 ```
@@ -1067,7 +1067,7 @@ variable "kms_tags" {
 
 ```terraform
 module "kms" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.3"
+  source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.4"
 
   // Required Variables
   kms_key_description         = "KMS CMK used for encrypting all objects in the Prod S3 backup bucket."
@@ -1075,9 +1075,9 @@ module "kms" {
   
   // Tags
   kms_tags = {
-     Provisoned_By  = "Terraform"
-     Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
-     Environment    = "Prod"
+     Provisioned_By    = "Terraform"
+     Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+     Environment       = "Prod"
    }
   
   // Optional Variables with module defined default values assigned
@@ -1155,8 +1155,8 @@ variable "kms_tags" {
   type        = map
   description = "Specify any tags that should be added to the KMS CMK being provisioned."
   default     = {
-    Provisoned_By  = "Terraform"
-    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Provisioned_By    = "Terraform"
+    Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }
 ```
@@ -1188,8 +1188,8 @@ kms_user_principal_list     = []
 kms_resource_principal_list = []
 
 kms_tags        = {
-    Provisoned_By  = "Terraform"
-    Module_GitHub_URL     = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    Provisioned_By    = "Terraform"
+    Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
 }
 ```
 

@@ -46,8 +46,8 @@ module "default_config" {
 
   name        = var.name
   description = var.description
-  
-  tags  = var.tags
+
+  tags = var.tags
 }
 
 # Test Custom Policy
@@ -85,6 +85,6 @@ module "key_policy_no_condition" {
   description  = var.description
   key_users    = ["arn:aws:iam::123456789101:user/TPol"]
   key_grantees = var.key_grantees
-  
+
   key_grant_resource_restriction = var.key_grant_resource_restriction
 }

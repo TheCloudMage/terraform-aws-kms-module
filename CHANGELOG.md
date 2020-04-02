@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <br>
 
-## v1.0.5 - [2020-04-1]
+## v1.1.0 - [2020-04-2]
+
+-----
 
 ### Added
 
@@ -23,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added value check for var.policy to allow module consumer to provide a custom policy instead of using the auto-generated one
 - Added __target_key_arn__ aws_kms_alias output
 - Descriptions added to each output
+- Github Actions for Terraform Added to auto run FMT, Validate, and Plan on Push or PR.
+
+<br>
 
 ### Changed
 
@@ -40,33 +45,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Output __kms_key_alias__ renamed => __alias_arn__
 - Grant policy refactored slightly to make the restrict to aws resource restriction optional
 - Updated Variable descriptions
-- Example code updated to utilize new module version
+- Example code updated to utilize new module version, and test key optional variable behavior
 - Updated Readme with MagicDoc
-
-### Removed
-
-- None
+- Updated ChangeLog
 
 <br><br>
 
 ## v1.0.4 - [2020-01-23]
 
-### Added
-
-- None
+-----
 
 ### Changed
 
 - Provisoned_By tag spelling corrected to Provisioned_By
 - Fixed all Documentation to address miss-spelled tag
 
-### Removed
-
-- None
-
 <br><br>
 
 ## 1.0.3 - [2020-01-21]
+
+-----
 
 ### Added
 
@@ -76,51 +74,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated_On tag unlike the others will automatically update on subsequent terraform apply executions.
 - Added tags variable, and set value in example variables.tf and env.tfvars
 
+<br>
+
 ### Changed
 
 - Readme Updated to reflect tagging vars and process.
 - Spacing for variables, outputs examples all set for consistency
 
-### Removed
-
-- None
-
 <br><br>
 
 ## 1.0.2 - [2019-10-15]
+
+-----
 
 ### Added
 
 - Added kms_owner_principal_list variable to add the ability to customize the key owner.
 - Added `example` folder with project root example calling the module.
 
+<br>
+
 ### Changed
 
 - Readme Updated
-
-### Removed
-
-- None
 
 <br><br>
 
 ## 1.0.1 - [2019-10-3]
 
+-----
+
 ### Added
 
 - Previous version of the module was returning a single string of comma separated values if multiple ARNs were provided to the optional params. Replaced the if/then with a conditional to correct the issue
 
-### Changed
-
-- None
-
-### Removed
-
-- None
-
 <br><br>
 
 ## [Unreleased] - [2019-09-22]
+
+-----
 
 ### Added
 

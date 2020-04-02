@@ -7,7 +7,7 @@
 
 <br>
 
-![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.0.5-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.1.0-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Terraform FMT](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20FMT/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Validate](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20Validate/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Plan](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20Plan/badge.svg)
 
 <br><br>
 
@@ -99,7 +99,7 @@ This module does not currently have any pre-requisites or dependency requirement
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -142,7 +142,7 @@ Module variables that need to either be defined or re-defined with a non-default
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -184,7 +184,7 @@ description = "Primary EBS Volume Encryption Key for the Production environment.
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = tf.name
@@ -227,7 +227,7 @@ variable "name" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Declaring the "name" variable
     name        = "cmk/ebs"
@@ -262,7 +262,7 @@ variable "description" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Declaring the "description" variable
     description = "Primary EBS Volume Encryption Key for the Production environment."
@@ -304,7 +304,7 @@ variable "is_enabled" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -346,7 +346,7 @@ variable "enable_key_rotation" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -383,7 +383,7 @@ variable "deletion_window_in_days" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -421,7 +421,7 @@ variable "key_usage" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -463,7 +463,7 @@ variable "customer_master_key_spec" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -546,7 +546,7 @@ variable "key_owners" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -626,7 +626,7 @@ variable "key_admins" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -699,7 +699,7 @@ variable "key_users" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -780,7 +780,7 @@ This variable and the corresponding key grant policy that is automatically gener
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -848,7 +848,7 @@ variable "key_grant_resource_restriction" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -913,7 +913,7 @@ data "aws_iam_policy_document" "custom_policy" {
 
 // Create the CMK using the custom policy
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -968,7 +968,7 @@ variable "tags" {
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.0.5"
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"

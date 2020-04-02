@@ -8,22 +8,52 @@ provider "aws" {
   region = var.provider_region
 }
 
+#############################
+# KMS CMK Custom Key Policy #
+#############################
+data "aws_iam_policy_document" "custom_policy" {
+
+  statement {
+
+    sid = "CustomKeyPolicy"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::123456789101:root"]
+    }
+
+    actions = [
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:Encrypt",
+      "kms:ReEncrypt*",
+      "kms:Decrypt",
+      "kms:ListGrants",
+      "kms:CreateGrant",
+      "kms:RevokeGrant",
+    ]
+    resources = ["*"]
+  }
+}
+
 #################
 # KMS CMK Module
 #################
-
-// Create the required KMS Key
 module "demo_cmk" {
-  source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.4"
+  source = "../"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
 
-  // Required Examples
-  kms_key_description       = var.cmk_description
-  kms_key_alias_name        = var.cmk_alias
-  
-  // Optional
-  # kms_owner_principal_list    = var.cmk_owners
-  # kms_admin_principal_list    = var.cmk_admins
-  # kms_user_principal_list     = var.cmk_users
-  # kms_resource_principal_list = var.cmk_grantees
-  # kms_tags                    = var.cmk_tags
+  // Required Variable Example
+  name        = var.name
+  description = var.description
+
+  // Optional Variable Example
+  # policy        = data.aws_iam_policy_document.custom_policy.json
+  # key_owners    = var.key_owners
+  # key_admins    = var.key_admins
+  # key_users     = var.key_users
+  # key_grantees  = var.key_grantees
+  # key_grant_resource_restriction = var.key_grant_resource_restriction
+  # key_grant_resource_restriction = false
+  # tags           = var.tags
 }

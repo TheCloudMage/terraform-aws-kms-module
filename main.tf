@@ -1,4 +1,15 @@
 ######################
+# Local Variables:   #
+######################
+locals {
+  grant_condition = {
+    test     = "Bool"
+    variable = "kms:GrantIsForAWSResource"
+    values   = [true]
+  }
+}
+
+######################
 # Data Sources:      #
 ######################
 data "aws_caller_identity" "current" {}
@@ -7,22 +18,24 @@ data "aws_caller_identity" "current" {}
 # KMS Key:           #
 ######################
 resource "aws_kms_key" "this" {
-  description             = var.kms_key_description
-  deletion_window_in_days = 30
-  is_enabled              = true
-  enable_key_rotation     = true
-  policy                  = data.aws_iam_policy_document.this.json
+  description              = var.description
+  deletion_window_in_days  = var.deletion_window_in_days
+  is_enabled               = var.is_enabled
+  enable_key_rotation      = var.enable_key_rotation
+  key_usage                = var.key_usage
+  customer_master_key_spec = var.customer_master_key_spec
+  policy                   = var.policy == "AUTO_GENERATE" ? data.aws_iam_policy_document.this.json : var.policy
 
   // Set the Name tag, and add Created_By, Creation_Date, and Creator_ARN tags with ignore change lifecycle policy.
   // Allow Updated_On to update on each exectuion.
   tags = merge(
-    var.kms_tags,
+    var.tags,
     {
-      Name            = lower(format("%s", var.kms_key_alias_name)),
-      Created_By      = data.aws_caller_identity.current.user_id
-      Creator_ARN     = data.aws_caller_identity.current.arn
-      Creation_Date   = timestamp()
-      Updated_On      = timestamp()
+      Name          = lower(format("%s", var.name)),
+      Created_By    = data.aws_caller_identity.current.user_id
+      Creator_ARN   = data.aws_caller_identity.current.arn
+      Creation_Date = timestamp()
+      Updated_On    = timestamp()
     }
   )
 
@@ -35,36 +48,35 @@ resource "aws_kms_key" "this" {
 # KMS Key Policy:    #
 ######################
 // Construct the Owner policy given to the root user to enable IAM User Permissions
-data "aws_iam_policy_document" "kms_owner_policy" {
+data "aws_iam_policy_document" "owner_policy" {
 
   statement {
-    
-    sid           = "KMSKeyOwnerPolicy"
-    
+
+    sid = "KeyOwnerPolicy"
+
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_owner_principal_list) > 0 ? var.kms_owner_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = length(var.key_owners) > 0 ? var.key_owners : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
-    
-    actions       = ["kms:*"]
-    
-    resources     = ["*"]
+
+    actions   = ["kms:*"]
+    resources = ["*"]
   }
 }
 
 // Construct the Administrator policy to define users/roles allowed to assume and administer this Key
-data "aws_iam_policy_document" "kms_admin_policy" {
+data "aws_iam_policy_document" "admin_policy" {
 
   statement {
-    
-    sid           = "KMSKeyAdministrationPolicy"
-    
+
+    sid = "KeyAdminPolicy"
+
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_admin_principal_list) > 0 ? var.kms_admin_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = length(var.key_admins) > 0 ? var.key_admins : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
-    
-    actions      = [
+
+    actions = [
       "kms:Create*",
       "kms:Describe*",
       "kms:Enable*",
@@ -86,24 +98,24 @@ data "aws_iam_policy_document" "kms_admin_policy" {
 
 // Use policy overrides to evalute a new policy to pass to the next layer.
 // This is essentially a dynamic conditional merge of the kms_owner and kms_admin policies.
-data "aws_iam_policy_document" "temp_kms_owner_kms_admin_merge_policy" {
-  source_json   = data.aws_iam_policy_document.kms_owner_policy.json
-  override_json = "${length(var.kms_admin_principal_list) > 0 ? data.aws_iam_policy_document.kms_admin_policy.json : null}"
+data "aws_iam_policy_document" "owner_and_admin_policy_merge" {
+  source_json   = data.aws_iam_policy_document.owner_policy.json
+  override_json = "${length(var.key_admins) > 0 ? data.aws_iam_policy_document.admin_policy.json : null}"
 }
 
 // Construct the Users policy to define users/roles allowed to assume this role and use this Key
-data "aws_iam_policy_document" "kms_user_policy" {
+data "aws_iam_policy_document" "user_policy" {
 
   statement {
-    
-    sid       = "KMSKeyUserPolicy"
-    
+
+    sid = "KeyUserPolicy"
+
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_user_principal_list) > 0 ? var.kms_user_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = length(var.key_users) > 0 ? var.key_users : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
 
-    actions   = [
+    actions = [
       "kms:DescribeKey",
       "kms:GenerateDataKey*",
       "kms:Encrypt",
@@ -116,37 +128,39 @@ data "aws_iam_policy_document" "kms_user_policy" {
 
 // Use policy overrides to evalute a new policy to pass to the next layer.
 // This is essentially a dynamic conditional merge of the [kms_owner, kms_admin] and kms_user policies.
-data "aws_iam_policy_document" "temp_kms_admin_kms_user_merge_policy" {
-  source_json   = data.aws_iam_policy_document.temp_kms_owner_kms_admin_merge_policy.json
-  override_json = "${length(var.kms_user_principal_list) > 0 ? data.aws_iam_policy_document.kms_user_policy.json : null}"
+data "aws_iam_policy_document" "admin_and_user_policy_merge" {
+  source_json   = data.aws_iam_policy_document.owner_and_admin_policy_merge.json
+  override_json = "${length(var.key_users) > 0 ? data.aws_iam_policy_document.user_policy.json : null}"
 }
 
 // Construct the Resource policy to define services that are allowed to List, Create, and Revoke Grants to this Key
-data "aws_iam_policy_document" "kms_resource_policy" {  
+data "aws_iam_policy_document" "grantee_policy" {
 
-  statement {  
-    
-    sid       = "KMSKeyGrantPolicy"
-    
+  statement {
+
+    sid = "KeyGrantPolicy"
+
     principals {
       type        = "AWS"
-      identifiers = length(var.kms_resource_principal_list) > 0 ? var.kms_resource_principal_list : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = length(var.key_grantees) > 0 ? var.key_grantees : ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
 
-    actions      = [
+    actions = [
       "kms:ListGrants",
       "kms:CreateGrant",
       "kms:RevokeGrant",
     ]
     resources = ["*"]
 
-    condition {
-      test       = "Bool"
-      variable   = "kms:GrantIsForAWSResource"
+    // Dynamically create the condition block only if var.key_grant_resource_restriction is set to true
+    dynamic "condition" {
+      for_each = var.key_grant_resource_restriction ? [local.grant_condition] : []
 
-      values     = [
-        true
-      ]
+      content {
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
+      }
     }
   }
 }
@@ -154,14 +168,14 @@ data "aws_iam_policy_document" "kms_resource_policy" {
 // Use policy overrides to evalute final KMS Key policy.
 // This is essentially a dynamic conditional merge of the [kms_owner, kms_admin, kms_user] and kms_resource policies.
 data "aws_iam_policy_document" "this" {
-  source_json   = data.aws_iam_policy_document.temp_kms_admin_kms_user_merge_policy.json
-  override_json = "${length(var.kms_resource_principal_list) > 0 ? data.aws_iam_policy_document.kms_resource_policy.json : null}"
+  source_json   = data.aws_iam_policy_document.admin_and_user_policy_merge.json
+  override_json = "${length(var.key_grantees) > 0 ? data.aws_iam_policy_document.grantee_policy.json : null}"
 }
 
 ######################
 # KMS Key Alias:     #
 ######################
 resource "aws_kms_alias" "this" {
-  name          = "alias/${var.kms_key_alias_name}"
+  name          = "alias/${var.name}"
   target_key_id = aws_kms_key.this.key_id
 }

@@ -1,14 +1,25 @@
 ######################
 # KMS Key Outputs:   #
 ######################
-output "cmk_id" {
-  value = module.demo_cmk.kms_key_id
+output "key_id" {
+  description = "The globally unique identifier for the key."
+  value       = module.demo_cmk.key_id
 }
 
-output "cmk_arn" {
-  value = module.demo_cmk.kms_key_arn
+output "key_arn" {
+  description = "The Amazon Resource Name (ARN) of the key."
+  value       = module.demo_cmk.key_arn
 }
 
-output "cmk_alias" {
-  value = module.demo_cmk.kms_key_alias
+##########################
+# KMS Key Alias Outputs: #
+##########################
+output "alias_arn" {
+  description = "The Amazon Resource Name (ARN) of the key alias."
+  value       = module.demo_cmk.alias_arn
+}
+
+output "target_key_arn" {
+  description = "The Amazon Resource Name (ARN) of the target key identifier."
+  value       = module.demo_cmk.target_key_arn
 }

@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "custom_policy" {
 # Test Defaults
 module "cmk_defaults" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
 
   name        = var.name
   description = var.description
@@ -53,7 +53,7 @@ module "cmk_defaults" {
 # Test Custom Policy
 module "custom_policy" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
 
   name                     = var.name
   description              = var.description
@@ -67,7 +67,7 @@ module "custom_policy" {
 # Test Key Policy Generation
 module "key_policy_condition" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
 
   name         = var.name
   description  = var.description
@@ -79,7 +79,7 @@ module "key_policy_condition" {
 # Test Key Policy Generation
 module "key_policy_no_condition" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
 
   name         = var.name
   description  = var.description

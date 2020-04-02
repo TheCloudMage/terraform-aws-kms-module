@@ -1,4 +1,4 @@
-name: 'Terraform Lint'
+name: 'Terraform Plan'
 on:
   # Trigger the workflow on push or pull request on the master branch only
   push:
@@ -17,15 +17,6 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@master
-      - name: 'Terraform Format'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: ${{ env.tf_version }}
-          tf_actions_subcommand: 'fmt'
-          tf_actions_working_dir: ${{ env.tf_working_dir }}
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -37,15 +28,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: 'Terraform Validate'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: ${{ env.tf_version }}
-          tf_actions_subcommand: 'validate'
-          tf_actions_working_dir: ${{ env.tf_working_dir }}
-          tf_actions_comment: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Terraform Plan'
         uses: hashicorp/terraform-github-actions@master
         with:

@@ -13,14 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Additional variable __is_enabled__ added and updated in cooresponding module resource
-- Additional variable __enable_key_rotation__ added and updated in cooresponding module resource
-- Additional variable __deletion_window_in_days__ added and updated in cooresponding module resource
-- Additional variable __key_usage__ added and updated in cooresponding module resource
-- Additional variable __customer_master_key_spec__ added and updated in cooresponding module resource
-- Additional variable __key_grant_resource_restriction__ added and updated in cooresponding module resource
-- Additional variable __policy__ added and updated in cooresponding module resource
-- Added value check for var.policy to allow module consumer to provide a custom policy instead of using the auto generated one
+- Additional variable __is_enabled__ added and updated in corresponding module resource
+- Additional variable __enable_key_rotation__ added and updated in corresponding module resource
+- Additional variable __deletion_window_in_days__ added and updated in corresponding module resource
+- Additional variable __key_usage__ added and updated in corresponding module resource
+- Additional variable __customer_master_key_spec__ added and updated in corresponding module resource
+- Additional variable __key_grant_resource_restriction__ added and updated in corresponding module resource
+- Additional variable __policy__ added and updated in corresponding module resource
+- Added value check for var.policy to allow module consumer to provide a custom policy instead of using the auto-generated one
 - Added __target_key_arn__ aws_kms_alias output
 - Descriptions added to each output
 

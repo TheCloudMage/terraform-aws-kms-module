@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "custom_policy" {
 # KMS CMK Module
 #################
 # Test Defaults
-module "default_config" {
+module "cmk_defaults" {
   source = "../"
   # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.0.5"
 

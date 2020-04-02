@@ -3,12 +3,12 @@
 ######################
 output "key_id" {
   description = "The globally unique identifier for the key."
-  value       = module.demo_cmk.key_id
+  value       = module.cmk_defaults.key_id
 }
 
 output "key_arn" {
   description = "The Amazon Resource Name (ARN) of the key."
-  value       = module.demo_cmk.key_arn
+  value       = module.cmk_defaults.key_arn
 }
 
 ##########################
@@ -16,10 +16,10 @@ output "key_arn" {
 ##########################
 output "alias_arn" {
   description = "The Amazon Resource Name (ARN) of the key alias."
-  value       = module.demo_cmk.alias_arn
+  value       = module.cmk_defaults.alias_arn
 }
 
 output "target_key_arn" {
   description = "The Amazon Resource Name (ARN) of the target key identifier."
-  value       = module.demo_cmk.target_key_arn
+  value       = module.cmk_defaults.target_key_arn
 }

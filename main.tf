@@ -181,5 +181,5 @@ resource "aws_kms_alias" "this" {
   count = var.module_enabled? 1 : 0
 
   name          = "alias/${var.name}"
-  target_key_id = aws_kms_key.this.key_id
+  target_key_id = aws_kms_key.this[0].key_id
 }

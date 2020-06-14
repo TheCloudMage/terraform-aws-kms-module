@@ -3,12 +3,12 @@
 ######################
 output "key_id" {
   description = "The globally unique identifier for the key."
-  value       = aws_kms_key.this[0].key_id
+  value       = var.module_enabled ? aws_kms_key.this[0].key_id : null
 }
 
 output "key_arn" {
   description = "The Amazon Resource Name (ARN) of the key."
-  value       = aws_kms_key.this[0].arn
+  value       = var.module_enabled ? aws_kms_key.this[0].arn : null
 }
 
 ##########################
@@ -16,10 +16,10 @@ output "key_arn" {
 ##########################
 output "alias_arn" {
   description = "The Amazon Resource Name (ARN) of the key alias."
-  value       = aws_kms_alias.this[0].arn
+  value       = var.module_enabled ? aws_kms_alias.this[0].arn : null
 }
 
 output "target_key_arn" {
   description = "The Amazon Resource Name (ARN) of the target key identifier."
-  value       = aws_kms_alias.this[0].target_key_arn
+  value       = var.module_enabled ? aws_kms_alias.this[0].target_key_arn : null
 }

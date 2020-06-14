@@ -29,6 +29,7 @@ key_users                      = ["arn:aws:iam::123456789101:role/KMS-KeyPolicy-
 key_grantees                   = ["arn:aws:iam::123456789101:user/Data", "arn:aws:iam::123456789101:user/Spock"]
 key_grant_resource_restriction = false
 policy                         = "AUTO_GENERATE"
+module_enabled                 = true
 
 tags = {
   Provisioned_By    = "Terraform"

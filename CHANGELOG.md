@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <br>
 
+## v1.1.1 - [2020-06-9]
+
+-----
+
+### Added
+
+- Additional variable __module_enabled__ to control module provisioning added and updated in corresponding module resource
+
+<br>
+
+### Changed
+
+- Variable __module_enabled__ added to add a virtual count to the module, to allow it to be turned off for an account/environment using a tfvar variable.
+- Updated Readme with new variable
+- Updated ChangeLog
+
+<br><br>
+
 ## v1.1.0 - [2020-04-2]
 
 -----

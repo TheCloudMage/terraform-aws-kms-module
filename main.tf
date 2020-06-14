@@ -18,6 +18,8 @@ data "aws_caller_identity" "current" {}
 # KMS Key:           #
 ######################
 resource "aws_kms_key" "this" {
+  count = var.module_enabled? 1 : 0
+
   description              = var.description
   deletion_window_in_days  = var.deletion_window_in_days
   is_enabled               = var.is_enabled
@@ -176,6 +178,8 @@ data "aws_iam_policy_document" "this" {
 # KMS Key Alias:     #
 ######################
 resource "aws_kms_alias" "this" {
+  count = var.module_enabled? 1 : 0
+
   name          = "alias/${var.name}"
-  target_key_id = aws_kms_key.this.key_id
+  target_key_id = aws_kms_key.this[0].key_id
 }

@@ -105,3 +105,9 @@ variable "tags" {
     Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
   }
 }
+
+variable "module_enabled" {
+  type        = bool
+  description = "Module variable that can be used to disable the module from deploying any resources if called from a multi-account/environment root project. Defaults to true, value of false will effectively turn the module off."
+  default     = true
+}

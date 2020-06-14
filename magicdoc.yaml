@@ -491,3 +491,23 @@ Variables:
                 Description:
                 Notes:
                 Images:
+        is_enabled:
+            ExampleValue: false
+            DefaultValue: true
+            GeneralDetails:
+                Description: >-
+                  Module variable that can be used to disable the module from deploying any resources if called from a multi-account/environment root project. Defaults to true, value of false will effectively turn the module off.
+                Notes:
+                Images:
+            VariableDetails:
+                Description:
+                Notes:
+                Images:
+            UsageDetails:
+                Description:
+                Notes:
+                Images:
+            Additional:
+                Description:
+                Notes:
+                Images:

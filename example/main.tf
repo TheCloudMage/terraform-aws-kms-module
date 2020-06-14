@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "custom_policy" {
 # Test Defaults
 module "cmk_defaults" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.1"
 
   name        = var.name
   description = var.description
@@ -53,7 +53,7 @@ module "cmk_defaults" {
 # Test Custom Policy
 module "custom_policy" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.1"
 
   name                     = var.name
   description              = var.description
@@ -67,7 +67,7 @@ module "custom_policy" {
 # Test Key Policy Generation
 module "key_policy_condition" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.1"
 
   name         = var.name
   description  = var.description
@@ -76,10 +76,10 @@ module "key_policy_condition" {
   key_grantees = var.key_grantees
 }
 
-# Test Key Policy Generation
+# Test Grant resource restriction condition
 module "key_policy_no_condition" {
   source = "../"
-  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.0"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.1"
 
   name         = var.name
   description  = var.description
@@ -87,4 +87,15 @@ module "key_policy_no_condition" {
   key_grantees = var.key_grantees
 
   key_grant_resource_restriction = var.key_grant_resource_restriction
+}
+
+# Test Disabling the module
+module "disabled" {
+  source = "../"
+  # source = "git@github.com:CloudMage-TF/AWS-KMS-Module.git?ref=v1.1.1"
+
+  name           = var.name
+  description    = var.description
+  key_users      = ["arn:aws:iam::123456789101:user/TPol"]
+  module_enabled = false
 }

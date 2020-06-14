@@ -24,18 +24,18 @@
   * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*name*]('')
   * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*description*]('')
 * [Optional Module Variables](#optional-module-variables)
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*is_enabled*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*enable_key_rotation*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*deletion_window_in_days*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_usage*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*customer_master_key_spec*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_owners*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_admins*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_users*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grantees*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grant_resource_restriction*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*policy*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*tags*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*is_enabled*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*enable_key_rotation*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*deletion_window_in_days*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_usage*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*customer_master_key_spec*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_owners*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_admins*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_users*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grantees*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grant_resource_restriction*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*policy*]('')
+  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*tags*]('')
 * [Module Example Usage](#module-example-usage)
 * [Variables and TFVar Reference File Templates](#variables-and-tfvar-reference-file-templates)
 * [Module Outputs Reference File Templates](#module-outputs-reference-file-templates)
@@ -118,6 +118,7 @@ module "example" {
     # key_grantees                   = []
     # key_grant_resource_restriction = True
     # policy                         = "AUTO_GENERATE"
+    # module_enabled                 = True
 
     # tags = {
     #   Provisioned_By = "Terraform"
@@ -838,8 +839,6 @@ variable "key_grant_resource_restriction" {
     description = "Specifies if the grant policy that will be created using the key_grantee list will be conditionally restricted to AWS resources. If grants are required for service-linked roles, this value needs to be set to false. Defaults to true."
     default     = true
 }
-
-
 ```
 
 <br><br>
@@ -922,6 +921,49 @@ module "example" {
 
     // Optional Variables with module defined default values assigned
     policy = data.aws_iam_policy_document.custom_policy.json
+}
+```
+
+<br><br><br>
+
+## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [module_enabled](tfvar.name)
+
+<br>
+
+Module flag that is used to disable the module when desired. Every resource in the module has a count property set to 1 if `module_enabled` is set to `true` (default) or to 0, meaning do not create the resource if `module_enabled` is set to `false`. This is useful for projects that deploy across multiple environments where the resources that this module provisions are not required or desired in a subset of the accounts to which the project is deployed.
+
+<br><br>
+
+> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> If `module_enabled` is set to a value of `false`, the module will __NOT__ provision any resources.
+
+<br><br>
+
+### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [module_enabled](module_enabled) within the modules variables.tf file
+
+```terraform
+variable "module_enabled" {
+  type        = bool
+  description = "Module variable that can be used to disable the module from deploying any resources if called from a multi-account/environment root project. Defaults to true, value of false will effectively turn the module off."
+  default     = true
+}
+```
+
+<br><br>
+
+### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [module_enabled](module_enabled) module variable within a projects root main.tf file
+
+```terraform
+// Set the module_enabled value
+module "example" {
+    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+
+    // Required Variables
+    name        = "cmk/ebs"
+    description = "Primary EBS Volume Encryption Key for the Production environment."
+
+
+    // Optional Variables with module defined default values assigned
+    module_enabled = true
 }
 ```
 
@@ -1087,6 +1129,12 @@ variable "tags" {
         Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
     }
 }
+
+variable "module_enabled" {
+  type        = bool
+  description = "Module variable that can be used to disable the module from deploying any resources if called from a multi-account/environment root project. Defaults to true, value of false will effectively turn the module off."
+  default     = true
+}
 ```
 
 <br><br>
@@ -1121,6 +1169,7 @@ description = "Value Required"
 # key_grantees                   = []
 # key_grant_resource_restriction = True
 # policy                         = "AUTO_GENERATE"
+# module_enabled                 = true
 
 # tags = {
 #   Provisioned_By = "Terraform"

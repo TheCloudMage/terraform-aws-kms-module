@@ -1,13 +1,16 @@
 <!-- VSCode Markdown Exclusions-->
 <!-- markdownlint-disable MD025 Single Title Headers-->
-
-# CloudMage KMS Terraform Module Documentation
-
-![CloudMage](images/tf_kms.png)
+![CloudMage](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/banners/cloudmage-banner-shortend.png)
 
 <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.1.1-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Terraform FMT](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20FMT/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Validate](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20Validate/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Plan](https://github.com/CloudMage-TF/AWS-KMS-Module/workflows/Terraform%20Plan/badge.svg)
+# CloudMage KMS Terraform Module Documentation
+
+![CloudMage](https://github.com/TheCloudMage/terraform-aws-kms-module/blob/master/images/tf_kms.png?raw=true)
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.1.1-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Terraform FMT](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20FMT/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Validate](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Validate/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Plan](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Plan/badge.svg)
 
 <br><br>
 
@@ -21,21 +24,21 @@
   * [Inline Variable Declaration](#inline-variable-declaration)
   * [TFVar Variable Declaration](#tfvar-variable-declaration)
 * [Required Module Variables](#required-variables)
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*name*]('')
-  * ![required_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*description*]('')
+  * ![required_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*name*]('')
+  * ![required_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/required-codeblock-drop.png) &nbsp; [*description*]('')
 * [Optional Module Variables](#optional-module-variables)
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*is_enabled*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*enable_key_rotation*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*deletion_window_in_days*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_usage*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*customer_master_key_spec*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_owners*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_admins*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_users*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grantees*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grant_resource_restriction*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*policy*]('')
-  * ![optional_variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*tags*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*is_enabled*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*enable_key_rotation*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*deletion_window_in_days*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_usage*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*customer_master_key_spec*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_owners*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_admins*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_users*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grantees*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*key_grant_resource_restriction*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*policy*]('')
+  * ![optional_variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/optional-codeblock-drop.png) &nbsp; [*tags*]('')
 * [Module Example Usage](#module-example-usage)
 * [Variables and TFVar Reference File Templates](#variables-and-tfvar-reference-file-templates)
 * [Module Outputs Reference File Templates](#module-outputs-reference-file-templates)
@@ -99,7 +102,7 @@ This module does not currently have any pre-requisites or dependency requirement
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -122,7 +125,7 @@ module "example" {
 
     # tags = {
     #   Provisioned_By = "Terraform"
-    #   Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+    #   Module_GitHub_URL = "https://github.com/TheCloudMage/terraform-aws-kms-module.git"
     # }
 }
 ```
@@ -135,7 +138,7 @@ Module variables that need to either be defined or re-defined with a non-default
 
 <br><br>
 
-> ![Tip](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/24/info.png) &nbsp;[__Tip:__](Tip) <br> There is also a third way to provide variable values using Terraform data sources. A data source is a unique type of code block used within a project that either instantiates or collects data that can be referenced throughout the project. A data source, for example,  can be declared to read the terraform state file and gather all of the available information from a previously deployed project stack. Any of the data contained within the data source can then be referenced to set the value of a project or module variable.
+> ![Tip](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/24/info.png) &nbsp;[__Tip:__](Tip) <br> There is also a third way to provide variable values using Terraform data sources. A data source is a unique type of code block used within a project that either instantiates or collects data that can be referenced throughout the project. A data source, for example,  can be declared to read the terraform state file and gather all of the available information from a previously deployed project stack. Any of the data contained within the data source can then be referenced to set the value of a project or module variable.
 
 <br><br>
 
@@ -143,7 +146,7 @@ Module variables that need to either be defined or re-defined with a non-default
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -157,7 +160,7 @@ module "example" {
 
 <br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; [variables.tf](variables.tf)
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; [variables.tf](variables.tf)
 
 ```terraform
 variable "name" {
@@ -172,7 +175,7 @@ variable "description" {
 
 <br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; [terraform.tfvars](terraform.tfvars)
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; [terraform.tfvars](terraform.tfvars)
 
 ```terraform
 name        = "cmk/ebs"
@@ -181,11 +184,11 @@ description = "Primary EBS Volume Encryption Key for the Production environment.
 
 <br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; [main.tf](main.tf)
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; [main.tf](main.tf)
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = tf.name
@@ -201,7 +204,7 @@ The following required module variables do not contain default values and must b
 
 <br>
 
-## ![Required_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/required-shieldblock.png) &nbsp; [name](tfvar.name)
+## ![Required_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/required-shieldblock.png) &nbsp; [name](tfvar.name)
 
 <br>
 
@@ -209,11 +212,11 @@ The name/alias that will be assigned to the CMK (key). This value will be append
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The required `alias/` prefix is already defined in the module and not required as part of the variable string.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The required `alias/` prefix is already defined in the module and not required as part of the variable string.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [name](name) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [name](name) within the modules variables.tf file
 
 ```terraform
 variable "name" {
@@ -224,11 +227,11 @@ variable "name" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [name](name) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [name](name) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Declaring the "name" variable
     name        = "cmk/ebs"
@@ -240,7 +243,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Required_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/required-shieldblock.png) &nbsp; [description](tfvar.name)
+## ![Required_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/required-shieldblock.png) &nbsp; [description](tfvar.name)
 
 <br>
 
@@ -248,7 +251,7 @@ The description of the CMK (key) as viewed in the AWS KMS console.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [description](description) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [description](description) within the modules variables.tf file
 
 ```terraform
 variable "description" {
@@ -259,11 +262,11 @@ variable "description" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [description](description) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [description](description) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Declaring the "description" variable
     description = "Primary EBS Volume Encryption Key for the Production environment."
@@ -281,7 +284,7 @@ The following optional module variables are not required because they already ha
 
 <br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [is_enabled](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [is_enabled](tfvar.name)
 
 <br>
 
@@ -289,7 +292,7 @@ Specifies whether the CMK (key) is enabled. Defaults to true.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [is_enabled](is_enabled) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [is_enabled](is_enabled) within the modules variables.tf file
 
 ```terraform
 variable "is_enabled" {
@@ -301,11 +304,11 @@ variable "is_enabled" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [is_enabled](is_enabled) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [is_enabled](is_enabled) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -319,7 +322,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [enable_key_rotation](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [enable_key_rotation](tfvar.name)
 
 <br>
 
@@ -327,11 +330,11 @@ Specifies whether key rotation is enabled. When rotation occurs, any new objects
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> From a general security perspective it is highly recommend to enable key rotation on KMS encryption keys.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> From a general security perspective it is highly recommend to enable key rotation on KMS encryption keys.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [enable_key_rotation](enable_key_rotation) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [enable_key_rotation](enable_key_rotation) within the modules variables.tf file
 
 ```terraform
 variable "enable_key_rotation" {
@@ -343,11 +346,11 @@ variable "enable_key_rotation" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [enable_key_rotation](enable_key_rotation) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [enable_key_rotation](enable_key_rotation) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -360,7 +363,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [deletion_window_in_days](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [deletion_window_in_days](tfvar.name)
 
 <br>
 
@@ -368,7 +371,7 @@ Duration in days after which the key is deleted after destruction of the resourc
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [deletion_window_in_days](deletion_window_in_days) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [deletion_window_in_days](deletion_window_in_days) within the modules variables.tf file
 
 ```terraform
 variable "deletion_window_in_days" {
@@ -380,11 +383,11 @@ variable "deletion_window_in_days" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [deletion_window_in_days](deletion_window_in_days) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [deletion_window_in_days](deletion_window_in_days) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -398,7 +401,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_usage](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_usage](tfvar.name)
 
 <br>
 
@@ -406,7 +409,7 @@ Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT or SIGN_VER
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_usage](key_usage) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_usage](key_usage) within the modules variables.tf file
 
 ```terraform
 variable "key_usage" {
@@ -418,11 +421,11 @@ variable "key_usage" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_usage](key_usage) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_usage](key_usage) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -436,7 +439,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [customer_master_key_spec](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [customer_master_key_spec](tfvar.name)
 
 <br>
 
@@ -444,11 +447,11 @@ Specifies whether the key contains a symmetric key or an asymmetric key pair and
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> SYMMETRIC_DEFAULT must be selected if the key being provisioned will be used to encrypt object stored in S3.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> SYMMETRIC_DEFAULT must be selected if the key being provisioned will be used to encrypt object stored in S3.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [customer_master_key_spec](customer_master_key_spec) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [customer_master_key_spec](customer_master_key_spec) within the modules variables.tf file
 
 ```terraform
 variable "customer_master_key_spec" {
@@ -460,11 +463,11 @@ variable "customer_master_key_spec" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [customer_master_key_spec](customer_master_key_spec) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [customer_master_key_spec](customer_master_key_spec) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -478,7 +481,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_owners](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_owners](tfvar.name)
 
 <br>
 
@@ -523,11 +526,11 @@ Statement:
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key owner policy statement determines what users/roles own the provisioned KMS key. Owners have `kms:*` permissions on the CMK. They can perform any action on the key including performing any modifications to the key and the key policy.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key owner policy statement determines what users/roles own the provisioned KMS key. Owners have `kms:*` permissions on the CMK. They can perform any action on the key including performing any modifications to the key and the key policy.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_owners](key_owners) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_owners](key_owners) within the modules variables.tf file
 
 ```terraform
 variable "key_owners" {
@@ -539,15 +542,15 @@ variable "key_owners" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_owners](key_owners) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_owners](key_owners) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -561,7 +564,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_admins](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_admins](tfvar.name)
 
 <br>
 
@@ -603,11 +606,11 @@ Statement:
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key administrator policy statement determines what users/roles have administrative rights on the provisioned KMS key. Key administrators can modify the key and the key policy, but they are not granted usage of the key, or the ability to manage grants for the key. If a key administrator requires usage permissions, then they would also need to be added to the key usage policy statement.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key administrator policy statement determines what users/roles have administrative rights on the provisioned KMS key. Key administrators can modify the key and the key policy, but they are not granted usage of the key, or the ability to manage grants for the key. If a key administrator requires usage permissions, then they would also need to be added to the key usage policy statement.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_admins](key_admins) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_admins](key_admins) within the modules variables.tf file
 
 ```terraform
 variable "key_admins" {
@@ -619,15 +622,15 @@ variable "key_admins" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_admins](key_admins) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_admins](key_admins) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -641,7 +644,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_users](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_users](tfvar.name)
 
 <br>
 
@@ -676,11 +679,11 @@ Statement:
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key usage policy statement determines what users/roles have rights to encrypt, decrypt, re-encrypt, and generate data key operations with the provisioned CMK. Any users/roles that are included in this policy statement have no other rights on the key unless they are also added to one of the other key policy statement blocks also.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key usage policy statement determines what users/roles have rights to encrypt, decrypt, re-encrypt, and generate data key operations with the provisioned CMK. Any users/roles that are included in this policy statement have no other rights on the key unless they are also added to one of the other key policy statement blocks also.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_users](key_users) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_users](key_users) within the modules variables.tf file
 
 ```terraform
 variable "key_users" {
@@ -692,15 +695,15 @@ variable "key_users" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_users](key_users) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_users](key_users) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -714,7 +717,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_grantees](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_grantees](tfvar.name)
 
 <br>
 
@@ -753,11 +756,11 @@ Statement:
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key resource grant policy statement determines what users/roles have rights to list, create, and revoke grants on the provisioned CMK. Key grants are a way of providing usage of the CMK temporarily. A user/role that has key grant or resource rights is allowed to grant applications, services, or resources a limited time pass to use the CMK and then revoke that pass when the application, service, or resource has completed the operation that required access to the key. No other rights on the key are given unless the user/role is also added to one of the other key policy statement blocks also.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The key resource grant policy statement determines what users/roles have rights to list, create, and revoke grants on the provisioned CMK. Key grants are a way of providing usage of the CMK temporarily. A user/role that has key grant or resource rights is allowed to grant applications, services, or resources a limited time pass to use the CMK and then revoke that pass when the application, service, or resource has completed the operation that required access to the key. No other rights on the key are given unless the user/role is also added to one of the other key policy statement blocks also.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_grantees](key_grantees) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_grantees](key_grantees) within the modules variables.tf file
 
 ```terraform
 variable "key_grantees" {
@@ -769,11 +772,11 @@ variable "key_grantees" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> You can not assign an IAM group as a policy principal, only IAM users/roles are allowed as policy principals.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_grantees](key_grantees) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_grantees](key_grantees) module variable within a projects root main.tf file
 
 This variable and the corresponding key grant policy that is automatically generated by the module for resource grant permissions are affected by the `key_grant_resource_restriction` variable value. The `key_grant_resource_restriction` variable controls the inclusion or exclusion of a condition statement that conditionally gets applied to the CMK grant policy restricting the creation of grants only to AWS resources if the value of the variable is the default value of `true`.  Setting the variable value to false will exclude the condition from being applied to the grant policy during provisioning.
 
@@ -781,7 +784,7 @@ This variable and the corresponding key grant policy that is automatically gener
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -798,11 +801,11 @@ module "example" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> If the CMK that is being provisioned will be used in conjunction with a service-linked role, the `key_grant_resource_restriction` variable must be set to `false`. During the process of creating a service-linked role, the provisioner of the role must create a grant for the role. If the aws resource restriction condition is in place, then all requests to create a grant by a user, including an admin will fail, and will not be available to the role.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> If the CMK that is being provisioned will be used in conjunction with a service-linked role, the `key_grant_resource_restriction` variable must be set to `false`. During the process of creating a service-linked role, the provisioner of the role must create a grant for the role. If the aws resource restriction condition is in place, then all requests to create a grant by a user, including an admin will fail, and will not be available to the role.
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_grant_resource_restriction](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [key_grant_resource_restriction](tfvar.name)
 
 <br>
 
@@ -831,7 +834,7 @@ Statement:
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_grant_resource_restriction](key_grant_resource_restriction) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [key_grant_resource_restriction](key_grant_resource_restriction) within the modules variables.tf file
 
 ```terraform
 variable "key_grant_resource_restriction" {
@@ -843,11 +846,11 @@ variable "key_grant_resource_restriction" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_grant_resource_restriction](key_grant_resource_restriction) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [key_grant_resource_restriction](key_grant_resource_restriction) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -861,7 +864,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [policy](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [policy](tfvar.name)
 
 <br>
 
@@ -869,11 +872,11 @@ A valid custom policy JSON document resource. If a custom key policy is desired,
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The `key_grant_resource_restriction` variable value is also evaluated during the automatic policy generation, and controls whether the KMS key grant policy will be restricted to only issuing grants to AWS resources, or not. The restriction will prevent the issuing of a key grant to any user or role and can only be issued instead by an AWS service or resource.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> The `key_grant_resource_restriction` variable value is also evaluated during the automatic policy generation, and controls whether the KMS key grant policy will be restricted to only issuing grants to AWS resources, or not. The restriction will prevent the issuing of a key grant to any user or role and can only be issued instead by an AWS service or resource.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [policy](policy) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [policy](policy) within the modules variables.tf file
 
 ```terraform
 variable "policy" {
@@ -885,7 +888,7 @@ variable "policy" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [policy](policy) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [policy](policy) module variable within a projects root main.tf file
 
 ```terraform
 // Define a custom KMS key policy to use instead of auto generating one
@@ -912,7 +915,7 @@ data "aws_iam_policy_document" "custom_policy" {
 
 // Create the CMK using the custom policy
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -926,7 +929,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [module_enabled](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [module_enabled](tfvar.name)
 
 <br>
 
@@ -934,11 +937,11 @@ Module flag that is used to disable the module when desired. Every resource in t
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> If `module_enabled` is set to a value of `false`, the module will __NOT__ provision any resources.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> If `module_enabled` is set to a value of `false`, the module will __NOT__ provision any resources.
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [module_enabled](module_enabled) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [module_enabled](module_enabled) within the modules variables.tf file
 
 ```terraform
 variable "module_enabled" {
@@ -950,12 +953,12 @@ variable "module_enabled" {
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [module_enabled](module_enabled) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [module_enabled](module_enabled) module variable within a projects root main.tf file
 
 ```terraform
 // Set the module_enabled value
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -969,7 +972,7 @@ module "example" {
 
 <br><br><br>
 
-## ![Optional_Variable](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [tags](tfvar.name)
+## ![Optional_Variable](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/48/optional-shieldblock.png) &nbsp; [tags](tfvar.name)
 
 <br>
 
@@ -987,11 +990,11 @@ This variable should contain a map of tags that will be assigned to the KMS CMK 
 
 <br><br>
 
-![CMK_Tags_Example](images/tf_kms_tags.png)
+![CMK_Tags_Example](https://github.com/TheCloudMage/terraform-aws-kms-module/blob/master/images/tf_kms_tags.png?raw=true)
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [tags](tags) within the modules variables.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Declaration of [tags](tags) within the modules variables.tf file
 
 ```terraform
 variable "tags" {
@@ -999,18 +1002,18 @@ variable "tags" {
     description = "Tags that will be applied to the provisioned KMS CMK."
     default     = {
         Provisioned_By = "Terraform"
-        Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+        Module_GitHub_URL = "https://github.com/TheCloudMage/terraform-aws-kms-module.git"
     }
 }
 ```
 
 <br><br>
 
-### ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [tags](tags) module variable within a projects root main.tf file
+### ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Setting the [tags](tags) module variable within a projects root main.tf file
 
 ```terraform
 module "example" {
-    source = "git@github.com:CloudMage-TF/AWS-KMS-Module?ref=v1.1.0"
+    source = "git@github.com:TheCloudMage/terraform-aws-kms-module?ref=v1.1.0"
 
     // Required Variables
     name        = "cmk/ebs"
@@ -1020,7 +1023,7 @@ module "example" {
     // Optional Variables with module defined default values assigned
     tags = {
         Provisioned_By = "Terraform"
-        Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+        Module_GitHub_URL = "https://github.com/TheCloudMage/terraform-aws-kms-module.git"
     }
 }
 ```
@@ -1039,11 +1042,11 @@ The following code blocks can be used or appended to an existing `variables.tf` 
 
 <br><br>
 
-## ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Module [variables.tf](variables.tf) Reference File
+## ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Module [variables.tf](variables.tf) Reference File
 
 ```terraform
 ###########################################################################
-# Required AWS-KMS-Module Module Vars:
+# Required terraform-aws-kms-module Module Vars:
 #-------------------------------------------------------------------------#
 # The following variables require consumer defined values to be provided. #
 ###########################################################################
@@ -1059,7 +1062,7 @@ variable "description" {
 
 
 ###########################################################################
-# Optional AWS-KMS-Module Module Vars:
+# Optional terraform-aws-kms-module Module Vars:
 #-------------------------------------------------------------------------#
 # The following variables have default values already set by the module.  #
 # They will not need to be included in a project root module variables.tf #
@@ -1126,7 +1129,7 @@ variable "tags" {
     description = "Tags that will be applied to the provisioned KMS CMK."
     default     = {
         Provisioned_By = "Terraform"
-        Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+        Module_GitHub_URL = "https://github.com/TheCloudMage/terraform-aws-kms-module.git"
     }
 }
 
@@ -1139,11 +1142,11 @@ variable "module_enabled" {
 
 <br><br>
 
-## ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Module [TFVars](TFVars) Reference File
+## ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Module [TFVars](TFVars) Reference File
 
 ```terraform
 ###########################################################################
-# Required AWS-KMS-Module Module Vars:
+# Required terraform-aws-kms-module Module Vars:
 #-------------------------------------------------------------------------#
 # The following variables require consumer defined values to be provided. #
 ###########################################################################
@@ -1152,7 +1155,7 @@ description = "Value Required"
 
 
 ###########################################################################
-# Optional AWS-KMS-Module Module Vars:
+# Optional terraform-aws-kms-module Module Vars:
 #-------------------------------------------------------------------------#
 # The following variables have default values already set by the module.  #
 # They will not need to be included in a project root module variables.tf #
@@ -1173,7 +1176,7 @@ description = "Value Required"
 
 # tags = {
 #   Provisioned_By = "Terraform"
-#   Module_GitHub_URL = "https://github.com/CloudMage-TF/AWS-KMS-Module.git"
+#   Module_GitHub_URL = "https://github.com/TheCloudMage/terraform-aws-kms-module.git"
 }
 ```
 
@@ -1185,11 +1188,11 @@ The template will finally create the following outputs that can be pulled and us
 
 <br><br>
 
-## ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Module [outputs.tf](outputs.tf) Reference File
+## ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Module [outputs.tf](outputs.tf) Reference File
 
 ```terraform
 ##############################################
-# AWS-KMS-Module Available Module Outputs:
+# terraform-aws-kms-module Available Module Outputs:
 ##############################################
 output "key_id" {
     aws_kms_key.this.key_id
@@ -1207,11 +1210,11 @@ output "target_key_arn" {
 
 <br><br>
 
-## ![Folder](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/opened_folder.png) &nbsp; Module Output Usage Reference File
+## ![Folder](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/opened_folder.png) &nbsp; Module Output Usage Reference File
 
 ```terraform
 ##############################################
-# AWS-KMS-Module Module Output Usage:
+# terraform-aws-kms-module Module Output Usage:
 ##############################################
 output "key_id" {
     value = module.example.key_id
@@ -1229,7 +1232,7 @@ output "target_key_arn" {
 
 <br><br>
 
-> ![Note](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> When referencing the module outputs be sure that the output value contains the identifier given to the module call. As an example, if the module was defined as `module "example" {}` then the output reference would be constructed as `module.example.key_id`.
+> ![Note](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/note.png) &nbsp; [__Note:__](Note) <br> When referencing the module outputs be sure that the output value contains the identifier given to the module call. As an example, if the module was defined as `module "example" {}` then the output reference would be constructed as `module.example.key_id`.
 
 <br><br>
 
@@ -1250,7 +1253,7 @@ output "target_key_arn" {
 
 # Contacts and Contributions
 
-This project is owned and maintained by [CloudMage-TF](https://github.com/CloudMage-TF)
+This project is owned and maintained by [TheCloudMage](https://github.com/TheCloudMage)
 
 <br>
 
@@ -1263,4 +1266,4 @@ To contribute, please:
 
 <br><br>
 
-![CloudMage](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/32/logo.png) This document was created with ![CloudMage](https://cloudmage-images-public.s3.us-east-2.amazonaws.com/icons/cloudmage/16/heart.png) by the open source [MagicDoc](https://pypi.org/project/magicdoc/) project!
+![CloudMage](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/32/logo.png) This document was created with ![CloudMage](https://s3-us-west-2.amazonaws.com/img.cloudmage.io/icons/cloudmage/16/heart.png) by the open source [MagicDoc](https://pypi.org/project/magicdoc/) project!

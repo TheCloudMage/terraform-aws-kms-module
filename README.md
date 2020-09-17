@@ -10,7 +10,7 @@
 
 <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.1.1-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Terraform FMT](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20FMT/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Validate](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Validate/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Plan](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Plan/badge.svg)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![Version-Badge](https://img.shields.io/badge/MODULE%20VERSION-v1.1.1-Green?style=for-the-badge&logo=terraform&logoColor=BLUE&logoWidth=25) &nbsp;&nbsp;&nbsp; ![Terraform FMT](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20FMT/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Validate](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Validate/badge.svg) &nbsp;&nbsp;&nbsp; ![Terraform Plan](https://github.com/TheCloudMage/terraform-aws-kms-module/workflows/Terraform%20Plan/badge.svg)
 
 <br><br>
 
